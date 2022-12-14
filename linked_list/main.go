@@ -7,10 +7,11 @@ import (
 
 type ILinkedList interface {
 	GetLast(*node.Node) *node.Node
-	IsEmpty() bool
+	isEmpty() bool
 	InsertAtStart(interface{}) *node.Node
 	InsertAtEnd(interface{}) *node.Node
-	DeleteNode(interface{}) error
+	DeleteNode(interface{})
+	Contains(interface{})
 	toArray() []node.Node
 	Size() int
 }
@@ -26,7 +27,7 @@ func New() *LinkedList {
 }
 
 func (ll *LinkedList) String() string {
-	if ll.IsEmpty() {
+	if ll.isEmpty() {
 		return "nil"
 	}
 	var str string
@@ -49,7 +50,7 @@ func GetLast(node *node.Node) *node.Node {
 }
 
 // IsEmpty returns either if the linked list is empty or not.
-func (ll *LinkedList) IsEmpty() bool {
+func (ll *LinkedList) isEmpty() bool {
 	return ll.Head == nil
 }
 
@@ -58,7 +59,7 @@ func (ll *LinkedList) IsEmpty() bool {
 func (ll *LinkedList) InsertAtStart(data interface{}) *node.Node {
 	newNode := node.NewNode(data)
 	// Check if the list is empty
-	if ll.IsEmpty() {
+	if ll.isEmpty() {
 		ll.Head = newNode
 		return newNode
 	}
@@ -73,7 +74,7 @@ func (ll *LinkedList) InsertAtStart(data interface{}) *node.Node {
 func (ll *LinkedList) InsertAtEnd(data interface{}) *node.Node {
 	newNode := node.NewNode(data)
 
-	if ll.IsEmpty() {
+	if ll.isEmpty() {
 		ll.Head = newNode
 		return newNode
 	}
@@ -89,9 +90,36 @@ func (ll *LinkedList) InsertAtEnd(data interface{}) *node.Node {
 // Else we remove the node
 // To remove the node we need to :
 // take the previous node and set it next node to the current node next node
-func (ll *LinkedList) DeleteNode(data interface{}) error {
+func (ll *LinkedList) DeleteNode(data interface{}) {
+	if ll.isEmpty() {
+		return
+	}
 
-	return nil
+	var previousNode *node.Node = nil
+	currentNode := ll.Head
+
+	for currentNode != nil {
+		if currentNode == ll.Head && currentNode.Data == data {
+			ll.Head = currentNode.Next
+		} else if currentNode.Data == data {
+			previousNode.Next = currentNode.Next
+		} else {
+			previousNode = currentNode
+		}
+		currentNode = currentNode.Next
+	}
+
+}
+
+func (ll *LinkedList) Contains(data interface{}) bool {
+	currentNode := ll.Head
+	for currentNode != nil {
+		if currentNode.Data == data {
+			return true
+		}
+		currentNode = currentNode.Next
+	}
+	return false
 }
 
 // ToArray transform the linked list to an array of Nodes.

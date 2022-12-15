@@ -30,6 +30,16 @@ func TestPush(t *testing.T) {
 	}
 }
 
+func TestPushFullStack(t *testing.T) {
+	s := New(1)
+	s.Push(10)
+	err := s.Push(20)
+
+	if err == nil {
+		t.Errorf("Expected error, got nil")
+	}
+}
+
 func TestPop(t *testing.T) {
 	expectedLastElement := 10
 	initialCapacity := 1
@@ -43,6 +53,15 @@ func TestPop(t *testing.T) {
 		t.Errorf("Expected %v, got %v", expectedLastElement, *lastElement)
 	} else if s.Capacity != expectedCapacity {
 		t.Errorf("Expected capacity %d, got %d", expectedCapacity, s.Size())
+	}
+}
+
+func TestPopEmptyStack(t *testing.T) {
+	s := New(1)
+	_, err := s.Pop()
+
+	if err == nil {
+		t.Errorf("Expected error, got nil")
 	}
 }
 
@@ -66,5 +85,14 @@ func TestPeek(t *testing.T) {
 
 	if *lastElement != expectedLastElement {
 		t.Errorf("Expected %v, got %v", expectedLastElement, *lastElement)
+	}
+}
+
+func TestPeekEmptyStack(t *testing.T) {
+	s := New(1)
+	lastElement := s.Peek()
+
+	if lastElement != nil {
+		t.Errorf("Expected nil, got %v", *lastElement)
 	}
 }

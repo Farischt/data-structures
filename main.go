@@ -2,19 +2,28 @@ package main
 
 import (
 	ll "ds/linked_list"
+	"ds/queue"
 	"ds/stack"
 	"fmt"
 )
 
 func main() {
-
 	// Stack
 	s := stack.New(20)
 	s.Push(10)
 	s.Push(20)
-	s.Push(30)
+	s.Push("hola")
 	s.Push(40)
 	fmt.Println(s)
+
+	// Queue
+	q := queue.New(3)
+	q.Enqueue(30)
+	q.Enqueue(10)
+	q.Enqueue(20)
+	item, _ := q.Dequeue()
+	fmt.Println(*item)
+	fmt.Println(q)
 
 	// Linked list
 	ll := ll.New()

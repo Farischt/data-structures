@@ -1,28 +1,27 @@
 package ll
 
 import (
-	"ds/node"
 	"fmt"
 )
 
 type ILinkedList interface {
-	GetLast(*node.Node) *node.Node
+	GetLast(*Node) *Node
 	isEmpty() bool
-	InsertAtStart(interface{}) *node.Node
-	InsertAtEnd(interface{}) *node.Node
+	InsertAtStart(interface{}) *Node
+	InsertAtEnd(interface{}) *Node
 	DeleteNode(interface{})
 	Contains(interface{})
-	toArray() []node.Node
+	toArray() []Node
 	Size() int
 }
 
 type LinkedList struct {
-	Head *node.Node
+	head *Node
 }
 
 func New() *LinkedList {
 	return &LinkedList{
-		Head: nil,
+		head: nil,
 	}
 }
 
@@ -31,56 +30,56 @@ func (ll *LinkedList) String() string {
 		return "nil"
 	}
 	var str string
-	currentNode := ll.Head
+	currentNode := ll.head
 	for currentNode != nil {
-		str += fmt.Sprintf("%v -> ", currentNode.Data)
-		currentNode = currentNode.Next
+		str += fmt.Sprintf("%v -> ", currentNode.data)
+		currentNode = currentNode.next
 	}
 	str += "nil"
 	return str
 }
 
 // GetLast returns the last node of the linked list.
-func GetLast(node *node.Node) *node.Node {
-	if node.Next == nil {
+func GetLast(node *Node) *Node {
+	if node.next == nil {
 		return node
 	}
-	nextNode := GetLast(node.Next)
+	nextNode := GetLast(node.next)
 	return nextNode
 }
 
 // IsEmpty returns either if the linked list is empty or not.
 func (ll *LinkedList) isEmpty() bool {
-	return ll.Head == nil
+	return ll.head == nil
 }
 
 // InsertAtStart insert a new node based on the data parameter, at the begining of the linked list.
 // It returns a pointer to the inserted Node
-func (ll *LinkedList) InsertAtStart(data interface{}) *node.Node {
-	newNode := node.NewNode(data)
+func (ll *LinkedList) InsertAtStart(data interface{}) *Node {
+	newNode := NewNode(data)
 	// Check if the list is empty
 	if ll.isEmpty() {
-		ll.Head = newNode
+		ll.head = newNode
 		return newNode
 	}
 
-	newNode.Next = ll.Head
-	ll.Head = newNode
-	return ll.Head
+	newNode.next = ll.head
+	ll.head = newNode
+	return ll.head
 }
 
 // InsertAtEnd insert a new node based on the data parameter, at the end of the linked list.
 // It returns a pointer to the inserted Node
-func (ll *LinkedList) InsertAtEnd(data interface{}) *node.Node {
-	newNode := node.NewNode(data)
+func (ll *LinkedList) InsertAtEnd(data interface{}) *Node {
+	newNode := NewNode(data)
 
 	if ll.isEmpty() {
-		ll.Head = newNode
+		ll.head = newNode
 		return newNode
 	}
 
-	lastNode := GetLast(ll.Head)
-	lastNode.Next = newNode
+	lastNode := GetLast(ll.head)
+	lastNode.next = newNode
 	return newNode
 }
 
@@ -95,42 +94,42 @@ func (ll *LinkedList) DeleteNode(data interface{}) {
 		return
 	}
 
-	var previousNode *node.Node = nil
-	currentNode := ll.Head
+	var previousNode *Node = nil
+	currentNode := ll.head
 
 	for currentNode != nil {
-		if currentNode == ll.Head && currentNode.Data == data {
-			ll.Head = currentNode.Next
-		} else if currentNode.Data == data {
-			previousNode.Next = currentNode.Next
+		if currentNode == ll.head && currentNode.data == data {
+			ll.head = currentNode.next
+		} else if currentNode.data == data {
+			previousNode.next = currentNode.next
 		} else {
 			previousNode = currentNode
 		}
-		currentNode = currentNode.Next
+		currentNode = currentNode.next
 	}
 
 }
 
 func (ll *LinkedList) Contains(data interface{}) bool {
-	currentNode := ll.Head
+	currentNode := ll.head
 	for currentNode != nil {
-		if currentNode.Data == data {
+		if currentNode.data == data {
 			return true
 		}
-		currentNode = currentNode.Next
+		currentNode = currentNode.next
 	}
 	return false
 }
 
 // ToArray transform the linked list to an array of Nodes.
-func (ll *LinkedList) toArray() []node.Node {
+func (ll *LinkedList) toArray() []Node {
 
-	currentNode := ll.Head
-	var array []node.Node
+	currentNode := ll.head
+	var array []Node
 
 	for currentNode != nil {
 		array = append(array, *currentNode)
-		currentNode = currentNode.Next
+		currentNode = currentNode.next
 	}
 
 	return array

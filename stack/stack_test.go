@@ -51,7 +51,7 @@ func TestPop(t *testing.T) {
 
 	if *lastElement != expectedLastElement {
 		t.Errorf("Expected %v, got %v", expectedLastElement, *lastElement)
-	} else if s.Capacity != expectedCapacity {
+	} else if s.capacity != expectedCapacity {
 		t.Errorf("Expected capacity %d, got %d", expectedCapacity, s.Size())
 	}
 }

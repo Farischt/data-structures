@@ -9,9 +9,9 @@ func TestGetLast(t *testing.T) {
 	ll.InsertAtEnd(200)
 	ll.InsertAtEnd(lastData)
 
-	last := GetLast(ll.Head)
-	if last.Data != lastData {
-		t.Errorf("Expected %d, got %v", lastData, last.Data)
+	last := GetLast(ll.head)
+	if last.data != lastData {
+		t.Errorf("Expected %d, got %v", lastData, last.data)
 	}
 }
 
@@ -26,8 +26,8 @@ func TestInsertAtStart(t *testing.T) {
 	firstData := 200
 	ll := New()
 	ll.InsertAtStart(firstData)
-	if ll.Head.Data != firstData {
-		t.Errorf("Expected %d, got %v", firstData, ll.Head.Data)
+	if ll.head.data != firstData {
+		t.Errorf("Expected %d, got %v", firstData, ll.head.data)
 	}
 }
 
@@ -36,9 +36,9 @@ func TestInsertAtEnd(t *testing.T) {
 	ll := New()
 	ll.InsertAtEnd(200)
 	ll.InsertAtEnd(lastData)
-	last := GetLast(ll.Head)
-	if last.Data != lastData {
-		t.Errorf("Expected %d, got %v", lastData, last.Data)
+	last := GetLast(ll.head)
+	if last.data != lastData {
+		t.Errorf("Expected %d, got %v", lastData, last.data)
 	}
 }
 
@@ -52,8 +52,8 @@ func TestDeleteFirstNode(t *testing.T) {
 	ll.InsertAtEnd(500)
 
 	ll.DeleteNode(firstNodeData)
-	if ll.Head.Data != secondNodeData {
-		t.Errorf("Expected %d, got %v", secondNodeData, ll.Head.Data)
+	if ll.head.data != secondNodeData {
+		t.Errorf("Expected %d, got %v", secondNodeData, ll.head.data)
 	}
 }
 
@@ -68,9 +68,9 @@ func TestDeleteLastNode(t *testing.T) {
 	ll.InsertAtEnd(lastNodeData)
 
 	ll.DeleteNode(lastNodeData)
-	last := GetLast(ll.Head)
-	if last.Data != previousNodeData {
-		t.Errorf("Expected %d, got %v", previousNodeData, last.Data)
+	last := GetLast(ll.head)
+	if last.data != previousNodeData {
+		t.Errorf("Expected %d, got %v", previousNodeData, last.data)
 	}
 }
 
@@ -129,8 +129,8 @@ func TestToArray(t *testing.T) {
 	array := ll.toArray()
 
 	for i, node := range array {
-		if node.Data != nodesData[i] {
-			t.Errorf("Expected %d, got %v", nodesData[i], node.Data)
+		if node.data != nodesData[i] {
+			t.Errorf("Expected %d, got %v", nodesData[i], node.data)
 		}
 	}
 }

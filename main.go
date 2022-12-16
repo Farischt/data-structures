@@ -4,12 +4,13 @@ import (
 	ll "ds/linked_list"
 	"ds/queue"
 	"ds/stack"
+	"ds/tree"
 	"fmt"
 )
 
 func main() {
-	// Stack
-	s := stack.New(20)
+	// Stac
+	var s stack.IStack = stack.New(20)
 	s.Push(10)
 	s.Push(20)
 	s.Push("hola")
@@ -17,7 +18,7 @@ func main() {
 	fmt.Println(s)
 
 	// Queue
-	q := queue.New(3)
+	var q queue.IQueue = queue.New(3)
 	q.Enqueue(30)
 	q.Enqueue(10)
 	q.Enqueue(20)
@@ -26,7 +27,7 @@ func main() {
 	fmt.Println(q)
 
 	// Linked list
-	ll := ll.New()
+	var ll ll.ILinkedList = ll.New()
 	ll.InsertAtEnd(200)
 	ll.InsertAtEnd(200)
 	ll.InsertAtEnd(350)
@@ -38,4 +39,17 @@ func main() {
 	fmt.Println(ll)
 	ll.DeleteNode(200)
 	fmt.Println(ll)
+
+	// Bst
+
+	var t tree.ITree = tree.New(nil)
+	t.Insert(10)
+	t.Insert(30)
+	t.Insert(50)
+	t.Insert(10)
+	t.Insert(15)
+	r := t.Search(15)
+	fmt.Println(r)
+
+	t.InOrderTraversal()
 }

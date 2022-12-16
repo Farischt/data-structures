@@ -5,12 +5,11 @@ import (
 )
 
 type ILinkedList interface {
-	GetLast(*Node) *Node
 	isEmpty() bool
 	InsertAtStart(interface{}) *Node
 	InsertAtEnd(interface{}) *Node
 	DeleteNode(interface{})
-	Contains(interface{})
+	Contains(interface{}) bool
 	toArray() []Node
 	Size() int
 }
@@ -37,15 +36,6 @@ func (ll *LinkedList) String() string {
 	}
 	str += "nil"
 	return str
-}
-
-// GetLast returns the last node of the linked list.
-func GetLast(node *Node) *Node {
-	if node.next == nil {
-		return node
-	}
-	nextNode := GetLast(node.next)
-	return nextNode
 }
 
 // IsEmpty returns either if the linked list is empty or not.
@@ -138,4 +128,13 @@ func (ll *LinkedList) toArray() []Node {
 // Size returns the size of the linked list
 func (ll *LinkedList) Size() int {
 	return len(ll.toArray())
+}
+
+// GetLast returns the last node of the linked list.
+func GetLast(node *Node) *Node {
+	if node.next == nil {
+		return node
+	}
+	nextNode := GetLast(node.next)
+	return nextNode
 }

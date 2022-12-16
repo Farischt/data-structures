@@ -1,18 +1,20 @@
 package tree
 
+import "fmt"
+
 type ITree interface {
 	Insert(data int)
-	Search(data int) bool
-	Remove(data int)
+	Search(data int) *Node
+	InOrderTraversal()
 }
 
 type BinarySearchTree struct {
 	root *Node 
 }
 
-func New() *BinarySearchTree {
+func New(node *Node) *BinarySearchTree {
 	return &BinarySearchTree{
-		root: nil,
+		root: node,
 	}
 }
 
@@ -46,13 +48,37 @@ func (t *BinarySearchTree) Insert(data int) {
 }
 
 
-func (t *BinarySearchTree) Search(data int) bool {
-	return false
-}
-
-func (t *BinarySearchTree) Remove(data interface{}) {
-}
-
-
+func (t *BinarySearchTree) Search(data int) *Node {
 	
+	if t.root == nil || t.root.data == data {
+		return t.root
+	}
+
+	currentNode := t.root
+
+	if data < currentNode.data {
+		bst := New(currentNode.left)
+		return bst.Search(data)
+	}
+
+	bst := New(currentNode.right)
+	return bst.Search(data)
+
+}
+
+func (t *BinarySearchTree) InOrderTraversal() {
+	
+	if t.root == nil {
+		return
+	}
+
+	bst := New(t.root.left)
+	bst.InOrderTraversal()
+
+	fmt.Println(t.root.data)
+
+	bst = New(t.root.right)
+	bst.InOrderTraversal()
+
+}
 

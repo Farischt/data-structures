@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// Stac
+	// Stack
 	var s stack.IStack = stack.New(20)
 	s.Push(10)
 	s.Push(20)
@@ -41,15 +41,17 @@ func main() {
 	fmt.Println(ll)
 
 	// Bst
-
 	var t tree.ITree = tree.New(nil)
-	t.Insert(10)
-	t.Insert(30)
-	t.Insert(50)
-	t.Insert(10)
-	t.Insert(15)
+	t.Insert(1)
+	t.Insert(2)
+	t.Insert(3)
+	t.Insert(4)
+	t.Insert(5)
+	t.Insert(6)
 	r := t.Search(15)
 	fmt.Println(r)
 
 	t.InOrderTraversal()
+	test := t.DepthFirstValues()
+	fmt.Printf("test: %v", test)
 }

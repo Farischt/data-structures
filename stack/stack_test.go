@@ -20,13 +20,15 @@ func TestIsEmpty(t *testing.T) {
 
 func TestPush(t *testing.T) {
 	expectedLastElement := 10
-	s := New(1)
+	s := New(2)
+
+	s.Push(20)
 	s.Push(expectedLastElement)
 
 	lastElement := s.Peek()
 
-	if *lastElement != expectedLastElement {
-		t.Errorf("Expected %v, got %v", expectedLastElement, *lastElement)
+	if lastElement != expectedLastElement {
+		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
 	}
 }
 
@@ -42,15 +44,16 @@ func TestPushFullStack(t *testing.T) {
 
 func TestPop(t *testing.T) {
 	expectedLastElement := 10
-	initialCapacity := 1
+	initialCapacity := 2
 	expectedCapacity := initialCapacity - 1
 	s := New(initialCapacity)
+	s.Push(15)
 	s.Push(expectedLastElement)
 
 	lastElement, _ := s.Pop()
 
-	if *lastElement != expectedLastElement {
-		t.Errorf("Expected %v, got %v", expectedLastElement, *lastElement)
+	if lastElement != expectedLastElement {
+		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
 	} else if s.capacity != expectedCapacity {
 		t.Errorf("Expected capacity %d, got %d", expectedCapacity, s.Size())
 	}
@@ -83,8 +86,8 @@ func TestPeek(t *testing.T) {
 
 	lastElement := s.Peek()
 
-	if *lastElement != expectedLastElement {
-		t.Errorf("Expected %v, got %v", expectedLastElement, *lastElement)
+	if lastElement != expectedLastElement {
+		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
 	}
 }
 
@@ -93,6 +96,6 @@ func TestPeekEmptyStack(t *testing.T) {
 	lastElement := s.Peek()
 
 	if lastElement != nil {
-		t.Errorf("Expected nil, got %v", *lastElement)
+		t.Errorf("Expected nil, got %v", lastElement)
 	}
 }

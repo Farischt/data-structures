@@ -6,9 +6,9 @@ type IStack interface {
 	IsFull() bool
 	IsEmpty() bool
 	Push(interface{}) error
-	Pop() (*interface{}, error)
+	Pop() (interface{}, error)
 	Size() int
-	Peek() *interface{}
+	Peek() interface{}
 }
 
 type Stack struct {
@@ -52,16 +52,15 @@ func (s *Stack) Push(data interface{}) error {
 }
 
 // Pop removes the last added element from the stack
-func (s *Stack) Pop() (*interface{}, error) {
+func (s *Stack) Pop() (interface{}, error) {
 	if s.IsEmpty() {
 		return nil, fmt.Errorf("stack is empty")
 	}
 
-	lastEl := s.storage[s.capacity-1]
+	lastEl := s.storage[len(s.storage)-1]
 	s.storage = s.storage[:len(s.storage)-1]
-
 	s.capacity--
-	return &lastEl, nil
+	return lastEl, nil
 }
 
 // Size returns the size of the stack
@@ -70,10 +69,10 @@ func (s *Stack) Size() int {
 }
 
 // Peek returns the last added element from the stack
-func (s *Stack) Peek() *interface{} {
+func (s *Stack) Peek() interface{} {
 	if s.IsEmpty() {
 		return nil
 	}
 
-	return &s.storage[s.capacity-1]
+	return s.storage[len(s.storage)-1]
 }

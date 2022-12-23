@@ -2,27 +2,27 @@ package stack
 
 import "fmt"
 
-type IStack interface {
+type IStack[T any] interface {
 	IsFull() bool
 	IsEmpty() bool
-	Push(interface{}) error
-	Pop() (interface{}, error)
+	Push(T) error
+	Pop() (T, error)
 	Size() int
-	Peek() interface{}
+	Peek() (T, error)
 }
 
-type Stack struct {
-	storage  []interface{}
+type Stack[T any] struct {
+	storage  []T
 	capacity int
 }
 
-func New(capacity int) *Stack {
-	return &Stack{
+func New[T any](capacity int) *Stack[T] {
+	return &Stack[T]{
 		capacity: capacity,
 	}
 }
 
-func (s *Stack) String() string {
+func (s *Stack[T]) String() string {
 	stack := "\n------- Stack --------\n"
 	for i := s.Size() - 1; i >= 0; i-- {
 		stack = stack + fmt.Sprintf("%v\n--\n", s.storage[i])
@@ -32,17 +32,17 @@ func (s *Stack) String() string {
 }
 
 // IsFull returns either if the stack is full or not
-func (s *Stack) IsFull() bool {
+func (s *Stack[T]) IsFull() bool {
 	return len(s.storage) == s.capacity
 }
 
 // IsEmpty returns either if the stack is empty or not
-func (s *Stack) IsEmpty() bool {
+func (s *Stack[T]) IsEmpty() bool {
 	return len(s.storage) == 0
 }
 
 // Push adds a new element to the stack
-func (s *Stack) Push(data interface{}) error {
+func (s *Stack[T]) Push(data T) error {
 	if s.IsFull() {
 		return fmt.Errorf("stack is full")
 	}
@@ -52,9 +52,10 @@ func (s *Stack) Push(data interface{}) error {
 }
 
 // Pop removes the last added element from the stack
-func (s *Stack) Pop() (interface{}, error) {
+func (s *Stack[T]) Pop() (T, error) {
+	var nilValue T
 	if s.IsEmpty() {
-		return nil, fmt.Errorf("stack is empty")
+		return nilValue, fmt.Errorf("stack is empty")
 	}
 
 	lastEl := s.storage[len(s.storage)-1]
@@ -64,15 +65,16 @@ func (s *Stack) Pop() (interface{}, error) {
 }
 
 // Size returns the size of the stack
-func (s *Stack) Size() int {
+func (s *Stack[T]) Size() int {
 	return len(s.storage)
 }
 
 // Peek returns the last added element from the stack
-func (s *Stack) Peek() interface{} {
+func (s *Stack[T]) Peek() (T, error) {
+	var nilValue T
 	if s.IsEmpty() {
-		return nil
+		return nilValue, fmt.Errorf("stack is empty")
 	}
 
-	return s.storage[len(s.storage)-1]
+	return s.storage[len(s.storage)-1], nil
 }

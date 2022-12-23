@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"ds/stack"
 	"fmt"
 )
 
@@ -8,7 +9,7 @@ type ITree interface {
 	Insert(data int)
 	Search(data int) *Node
 	InOrderTraversal()
-	DepthFirstValues() []int
+	DepthFirstValues(int) []int
 }
 
 type BinarySearchTree struct {
@@ -78,16 +79,16 @@ func (t *BinarySearchTree) InOrderTraversal() {
 	bst.InOrderTraversal()
 }
 
-func (t *BinarySearchTree) DepthFirstValues() []int {
+func (t *BinarySearchTree) DepthFirstValues(capacity int) []int {
 	if t.root == nil {
 		return []int{}
 	}
 
-	var tempStack stacker
+	var tempStack stack.IStack[*Node]
 
 	currentNode := t.root
 	result := []int{}
-	tempStack = NewStack(6)
+	tempStack = stack.New[*Node](6)
 	tempStack.Push(currentNode)
 
 	for !tempStack.IsEmpty() {

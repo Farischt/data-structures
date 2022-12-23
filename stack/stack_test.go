@@ -3,7 +3,7 @@ package stack
 import "testing"
 
 func TestIsFull(t *testing.T) {
-	s := New(2)
+	s := New[int64](2)
 	s.Push(10)
 	s.Push(20)
 	if !s.IsFull() {
@@ -12,7 +12,7 @@ func TestIsFull(t *testing.T) {
 }
 
 func TestIsEmpty(t *testing.T) {
-	s := New(1)
+	s := New[int64](1)
 	if !s.IsEmpty() {
 		t.Errorf("Expected true, got false")
 	}
@@ -20,12 +20,12 @@ func TestIsEmpty(t *testing.T) {
 
 func TestPush(t *testing.T) {
 	expectedLastElement := 10
-	s := New(2)
+	s := New[int](2)
 
 	s.Push(20)
 	s.Push(expectedLastElement)
 
-	lastElement := s.Peek()
+	lastElement, _ := s.Peek()
 
 	if lastElement != expectedLastElement {
 		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
@@ -33,7 +33,7 @@ func TestPush(t *testing.T) {
 }
 
 func TestPushFullStack(t *testing.T) {
-	s := New(1)
+	s := New[int64](1)
 	s.Push(10)
 	err := s.Push(20)
 
@@ -46,7 +46,7 @@ func TestPop(t *testing.T) {
 	expectedLastElement := 10
 	initialCapacity := 2
 	expectedCapacity := initialCapacity - 1
-	s := New(initialCapacity)
+	s := New[int](initialCapacity)
 	s.Push(15)
 	s.Push(expectedLastElement)
 
@@ -60,7 +60,7 @@ func TestPop(t *testing.T) {
 }
 
 func TestPopEmptyStack(t *testing.T) {
-	s := New(1)
+	s := New[int64](1)
 	_, err := s.Pop()
 
 	if err == nil {
@@ -70,7 +70,7 @@ func TestPopEmptyStack(t *testing.T) {
 
 func TestSize(t *testing.T) {
 	expectedSize := 2
-	s := New(expectedSize)
+	s := New[int](expectedSize)
 	s.Push(10)
 	s.Push(20)
 
@@ -81,10 +81,10 @@ func TestSize(t *testing.T) {
 
 func TestPeek(t *testing.T) {
 	expectedLastElement := 10
-	s := New(1)
+	s := New[int](1)
 	s.Push(expectedLastElement)
 
-	lastElement := s.Peek()
+	lastElement, _ := s.Peek()
 
 	if lastElement != expectedLastElement {
 		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
@@ -92,10 +92,10 @@ func TestPeek(t *testing.T) {
 }
 
 func TestPeekEmptyStack(t *testing.T) {
-	s := New(1)
-	lastElement := s.Peek()
+	s := New[int](1)
+	_, err := s.Peek()
 
-	if lastElement != nil {
-		t.Errorf("Expected nil, got %v", lastElement)
+	if err == nil {
+		t.Errorf("Expected nil, got %v", err)
 	}
 }

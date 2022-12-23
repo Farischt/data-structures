@@ -10,10 +10,10 @@ import (
 
 func main() {
 	// Stack
-	var s stack.IStack = stack.New(20)
+	var s stack.IStack[int] = stack.New[int](20)
 	s.Push(10)
 	s.Push(20)
-	s.Push("hola")
+	s.Push(30)
 	s.Push(40)
 	fmt.Println(s)
 
@@ -52,6 +52,7 @@ func main() {
 	fmt.Println(r)
 
 	t.InOrderTraversal()
-	test := t.DepthFirstValues()
+	// 6 is the number of nodes in the tree
+	test := t.DepthFirstValues(6)
 	fmt.Printf("test: %v", test)
 }

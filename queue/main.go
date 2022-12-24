@@ -2,26 +2,26 @@ package queue
 
 import "fmt"
 
-type IQueue interface {
+type IQueue[T any] interface {
 	IsEmpty() bool
 	IsFull() bool
-	Enqueue(interface{}) error
-	Dequeue() (*interface{}, error)
+	Enqueue(T) error
+	Dequeue() (*T, error)
 	Size() int
 }
 
-type Queue struct {
-	storage  []interface{}
+type Queue[T any] struct {
+	storage  []T
 	capacity int
 }
 
-func New(capacity int) *Queue {
-	return &Queue{
+func New[T any](capacity int) *Queue[T] {
+	return &Queue[T]{
 		capacity: capacity,
 	}
 }
 
-func (q *Queue) String() string {
+func (q *Queue[T]) String() string {
 	queue := "\n------- Queue --------\n"
 
 	for _, el := range q.storage {
@@ -32,17 +32,17 @@ func (q *Queue) String() string {
 }
 
 // IsEmpty returns either if the queue is empty or not
-func (q *Queue) IsEmpty() bool {
+func (q *Queue[T]) IsEmpty() bool {
 	return len(q.storage) == 0
 }
 
 // IsFull returns either if the queue is full or not
-func (q *Queue) IsFull() bool {
+func (q *Queue[T]) IsFull() bool {
 	return len(q.storage) == q.capacity
 }
 
 // Enqueue adds a new element to the queue
-func (q *Queue) Enqueue(data interface{}) error {
+func (q *Queue[T]) Enqueue(data T) error {
 
 	if q.IsFull() {
 		return fmt.Errorf("queue is full")
@@ -53,7 +53,7 @@ func (q *Queue) Enqueue(data interface{}) error {
 }
 
 // Dequeue removes the first added element from the queue
-func (q *Queue) Dequeue() (*interface{}, error) {
+func (q *Queue[T]) Dequeue() (*T, error) {
 
 	if q.IsEmpty() {
 		return nil, fmt.Errorf("queue is empty")
@@ -67,6 +67,6 @@ func (q *Queue) Dequeue() (*interface{}, error) {
 }
 
 // Size returns the size of the queue
-func (q *Queue) Size() int {
+func (q *Queue[T]) Size() int {
 	return len(q.storage)
 }

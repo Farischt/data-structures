@@ -73,12 +73,7 @@ func (ll *LinkedList) InsertAtEnd(data interface{}) *Node {
 	return newNode
 }
 
-// In order to delete a node we need to :
-// First find that node
-// If we don't find that node we return an error
-// Else we remove the node
-// To remove the node we need to :
-// take the previous node and set it next node to the current node next node
+// DeleteNode deletes a node from the linked list based on the data parameter.
 func (ll *LinkedList) DeleteNode(data interface{}) {
 	if ll.isEmpty() {
 		return

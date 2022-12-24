@@ -6,8 +6,10 @@ type IStack[T any] interface {
 	IsFull() bool
 	IsEmpty() bool
 	Push(T) error
+	// Pop method should return a ptr of T
 	Pop() (T, error)
 	Size() int
+	// Peek method should also return a ptr of T
 	Peek() (T, error)
 }
 

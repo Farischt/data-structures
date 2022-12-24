@@ -18,7 +18,7 @@ func main() {
 	fmt.Println(s)
 
 	// Queue
-	var q queue.IQueue = queue.New(3)
+	var q queue.IQueue[int] = queue.New[int](3)
 	q.Enqueue(30)
 	q.Enqueue(10)
 	q.Enqueue(20)
@@ -42,17 +42,23 @@ func main() {
 
 	// Bst
 	var t tree.ITree = tree.New(nil)
-	t.Insert(1)
-	t.Insert(2)
-	t.Insert(3)
-	t.Insert(4)
-	t.Insert(5)
-	t.Insert(6)
-	r := t.Search(15)
-	fmt.Println(r)
+	t.Insert(15)
+	t.Insert(20)
+	t.Insert(25)
+	t.Insert(21)
+	t.Insert(22)
+	t.Insert(27)
+	t.Insert(26)
+	r := t.Search(20)
+	fmt.Printf("the node searched : %v\n", r)
 
 	t.InOrderTraversal()
+
+	t.Remove(25)
 	// 6 is the number of nodes in the tree
-	test := t.DepthFirstValues(6)
-	fmt.Printf("test: %v", test)
+	dfv := t.DepthFirstValues(9)
+	fmt.Printf("depth first values: %v\n", dfv)
+
+	bfv := t.BreathFirstValues(9)
+	fmt.Printf("breath first values: %v\n", bfv)
 }

@@ -1,9 +1,10 @@
 package tree
 
 type Node struct {
-	data  int
-	left  *Node
-	right *Node
+	data   int
+	left   *Node
+	right  *Node
+	Parent *Node
 }
 
 type Direction string
@@ -34,7 +35,7 @@ func (n *Node) IsFromRight(parentNode *Node) bool {
 
 // RemoveNodeWithTwoChild removes a node with two children.
 func (currentNode *Node) RemoveNodeWithTwoChild() {
-	// In this case we need to find the inorder successor of the right child
+	// In this case we need to find the inorder successor of the currentNode
 	var temp *Node = currentNode.right
 	var tempParent *Node = nil
 

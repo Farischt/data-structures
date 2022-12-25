@@ -50,7 +50,9 @@ func main() {
 	t.Insert(27)
 	t.Insert(26)
 	r := t.Search(20)
+	search := t.BreathFirstSearch(0, 7)
 	fmt.Printf("the node searched : %v\n", r)
+	fmt.Printf("the node searched with breath first search %v\n", search)
 
 	t.InOrderTraversal()
 

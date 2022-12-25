@@ -188,3 +188,49 @@ func Test_BreathFirstSearchRoot(t *testing.T) {
 		t.Errorf("invalid node, test breath first search root.")
 	}
 }
+
+func Test_FindInorderSuccessor(t *testing.T) {
+	tree := New(nil)
+	tree.Insert(20)
+	tree.Insert(25)
+	tree.Insert(9)
+	tree.Insert(5)
+	tree.Insert(12)
+	tree.Insert(11)
+	tree.Insert(14)
+
+	node := tree.FindInorderSuccessor(9)
+	if node.data != 11 {
+		t.Errorf("invalid node, test find inorder successor.")
+	}
+
+	node = tree.FindInorderSuccessor(14)
+	if node.data != 20 {
+		t.Errorf("invalid node, test find inorder successor.")
+	}
+
+	node = tree.FindInorderSuccessor(25)
+	if node != nil {
+		t.Errorf("node is not nil, test find inorder successor.")
+	}
+
+	node = tree.FindInorderSuccessor(50)
+	if node != nil {
+		t.Errorf("node is not nil, test find inorder successor.")
+	}
+
+	node = tree.FindInorderSuccessor(5)
+	if node.data != 9 {
+		t.Errorf("invalid node, test find inorder successor.")
+	}
+
+	node = tree.FindInorderSuccessor(12)
+	if node.data != 14 {
+		t.Errorf("invalid node, test find inorder successor.")
+	}
+
+	node = tree.FindInorderSuccessor(20)
+	if node.data != 25 {
+		t.Errorf("invalid node, test find inorder successor.")
+	}
+}

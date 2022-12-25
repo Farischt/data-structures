@@ -14,6 +14,7 @@ type ITree interface {
 	DepthFirstValues(int) []int
 	BreathFirstValues(int) []int
 	FindMinimumValue() *Node
+	BreathFirstSearch(data int, capacity int) *Node
 }
 
 type BinarySearchTree struct {
@@ -91,7 +92,7 @@ func (t *BinarySearchTree) Remove(data int) {
 	} else {
 		// In this case the currentNode to delete has no child
 		// We need to cut the relation
-		currentNode.RemoveNodeWithNoChild(parentNode, t)
+		currentNode.RemoveLeafNode(parentNode, t)
 		return
 	}
 
@@ -204,4 +205,35 @@ func (t *BinarySearchTree) FindMinimumValue() *Node {
 	}
 
 	return currentNode
+}
+
+func (t *BinarySearchTree) BreathFirstSearch(data int, capacity int) *Node {
+	if t.root == nil {
+		return nil
+	}
+
+	var tempQueue queue.IQueue[*Node]
+	var currentNode *Node
+
+	tempQueue = queue.New[*Node](capacity)
+	currentNode = t.root 
+	tempQueue.Enqueue(currentNode)
+
+	for !tempQueue.IsEmpty() {
+		dequeuedNode, _ := tempQueue.Dequeue()
+		currentNode = *dequeuedNode
+
+		if currentNode.data == data {
+			return currentNode
+		}
+
+		if currentNode.left != nil {
+			tempQueue.Enqueue(currentNode.left)
+		} 
+
+		if currentNode.right != nil {
+			tempQueue.Enqueue(currentNode.right)
+		}
+	}
+	return nil
 }

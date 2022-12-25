@@ -7,7 +7,7 @@ import (
 )
 
 type ITree interface {
-	Insert(data int)
+	Insert(data int) *Node
 	Remove(data int)
 	Search(data int) *Node
 	InOrderTraversal()
@@ -15,6 +15,7 @@ type ITree interface {
 	BreathFirstValues(int) []int
 	FindMinimumValue() *Node
 	BreathFirstSearch(data int, capacity int) *Node
+	FindInorderSuccessor(data int) *Node
 }
 
 type BinarySearchTree struct {
@@ -28,12 +29,13 @@ func New(node *Node) *BinarySearchTree {
 }
 
 // Insert a new node in the tree, if the tree is empty the new node will be the root.
-func (t *BinarySearchTree) Insert(data int) {
+func (t *BinarySearchTree) Insert(data int) *Node {
 	newNode := NewNode(data)
 
 	if t.root == nil {
+		newNode.Parent = nil
 		t.root = newNode
-		return
+		return newNode
 	}
 
 	var currentNode *Node = t.root
@@ -41,18 +43,22 @@ func (t *BinarySearchTree) Insert(data int) {
 	for currentNode != nil {
 		if data <= currentNode.data {
 			if currentNode.left == nil {
+				newNode.Parent = currentNode
 				currentNode.left = newNode
-				return
+				return newNode
 			}
 			currentNode = currentNode.left
 		} else {
 			if currentNode.right == nil {
+				newNode.Parent = currentNode
 				currentNode.right = newNode
-				return
+				return newNode
 			}
 			currentNode = currentNode.right
 		}
 	}
+
+	return nil
 }
 
 // Remove a node from the tree and rearrange the tree based on the data.
@@ -216,7 +222,7 @@ func (t *BinarySearchTree) BreathFirstSearch(data int, capacity int) *Node {
 	var currentNode *Node
 
 	tempQueue = queue.New[*Node](capacity)
-	currentNode = t.root 
+	currentNode = t.root
 	tempQueue.Enqueue(currentNode)
 
 	for !tempQueue.IsEmpty() {
@@ -229,11 +235,49 @@ func (t *BinarySearchTree) BreathFirstSearch(data int, capacity int) *Node {
 
 		if currentNode.left != nil {
 			tempQueue.Enqueue(currentNode.left)
-		} 
+		}
 
 		if currentNode.right != nil {
 			tempQueue.Enqueue(currentNode.right)
 		}
 	}
 	return nil
+}
+
+func (t *BinarySearchTree) FindInorderSuccessor(data int) *Node {
+
+	if t.root == nil {
+		return nil
+	}
+	// Get to the node we are looking for
+	currentNode := t.Search(data)
+
+	if currentNode == nil {
+		return nil
+	}
+	// At this point we found the Node we were looking for
+	// First thing to check is if i have right child. Meaning i will be going for the right child
+
+	if currentNode.right != nil {
+		// In the case we need to go one step right and all the way left until it is nill
+		currentNode = currentNode.right
+
+		if currentNode.left != nil {
+			for currentNode.left != nil {
+				currentNode = currentNode.left
+			}
+		}
+
+		return currentNode
+	} else {
+
+		for currentNode.Parent != nil && currentNode.IsFromRight(currentNode.Parent) {
+			if currentNode.Parent.Parent == nil {
+				return nil
+			}
+			currentNode = currentNode.Parent
+		}
+
+		return currentNode.Parent
+	}
 }

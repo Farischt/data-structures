@@ -73,7 +73,7 @@ func (currentNode *Node) RemoveNodeWithOneChild(parentNode *Node, t *BinarySearc
 }
 
 // RemoveNodeWithNoChild removes a node with no child. This is the case when the node is a leaf. In this case we just need to remove the reference to the node from the parent.
-func (currentNode *Node) RemoveNodeWithNoChild(parentNode *Node, t *BinarySearchTree) {
+func (currentNode *Node) RemoveLeafNode(parentNode *Node, t *BinarySearchTree) {
 	if currentNode == t.root {
 		t.root = nil
 	} else if currentNode.IsFromRight(parentNode) {

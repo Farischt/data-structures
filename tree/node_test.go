@@ -93,7 +93,7 @@ func Test_RemoveRootNodeWithNoChild(t *testing.T) {
 	node := NewNode(10)
 	tree.root = node
 
-	node.RemoveNodeWithNoChild(nil, tree)
+	node.RemoveLeafNode(nil, tree)
 	if tree.root != nil {
 		t.Errorf("Root node is not nil. Delete root node with no child")
 	}
@@ -138,7 +138,7 @@ func Test_RemoveLeafNode(t *testing.T) {
 	parentNode.left = currentNode
 	tree.root = parentNode
 
-	currentNode.RemoveNodeWithNoChild(parentNode, tree)
+	currentNode.RemoveLeafNode(parentNode, tree)
 	if parentNode.left != nil {
 		t.Errorf("Parent child node is not nil. Delete leaf node")
 	}

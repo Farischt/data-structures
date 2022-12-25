@@ -61,7 +61,7 @@ func (s *Stack[T]) Pop() (T, error) {
 	}
 
 	lastEl := s.storage[len(s.storage)-1]
-	s.storage = s.storage[:len(s.storage)-1]
+	s.storage = s.storage[0:len(s.storage)-1]
 	s.capacity--
 	return lastEl, nil
 }

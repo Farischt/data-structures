@@ -155,3 +155,36 @@ func Test_FindMinimumValue(t *testing.T) {
 		t.Errorf("invalid min value, test find minimum value.")
 	}
 }
+
+func Test_BreathFirstSearch(t *testing.T) {
+	tree := New(nil)
+	tree.Insert(10)
+	tree.Insert(15)
+	tree.Insert(9)
+	tree.Insert(8)
+	node := tree.BreathFirstSearch(8, 4)
+	secondNode := tree.BreathFirstSearch(50, 4)
+	if node.data != 8 {
+		t.Errorf("invalid node, test breath first search.")
+	}
+	if secondNode != nil {
+		t.Errorf("node is not nil, test breath first search.")
+	}
+}
+
+func Test_EmptyBreathFirstSearch(t *testing.T) {
+	tree := New(nil)
+	node := tree.BreathFirstSearch(8, 4)
+	if node != nil {
+		t.Errorf("node is not nil, test empty breath first search.")
+	}
+}
+
+func Test_BreathFirstSearchRoot(t *testing.T) {
+	tree := New(nil)
+	tree.Insert(10)
+	node := tree.BreathFirstSearch(10, 4)
+	if node.data != 10 {
+		t.Errorf("invalid node, test breath first search root.")
+	}
+}

@@ -111,7 +111,8 @@ func (g *Graph[T]) HasPathDFS(src T, dst T) bool {
 	stack.Push(src)
 
 	for !stack.IsEmpty() {
-		currentNode, _ := stack.Pop()
+		node, _ := stack.Pop()
+		currentNode := *node
 		visitedNodes[currentNode] = true
 
 		if currentNode == dst {
@@ -143,7 +144,8 @@ func (g *Graph[T]) ComponentCount() int {
 			stack.Push(node)
 
 			for !stack.IsEmpty() {
-				currentNode, _ := stack.Pop()
+				node, _ := stack.Pop()
+				currentNode := *node
 				visitedNodes[currentNode] = true
 
 				for _, neighbor := range g.nodes[currentNode] {
@@ -174,7 +176,8 @@ func (g *Graph[T]) LargestComponentSize() int {
 
 			currentSize := 0
 			for !stack.IsEmpty() {
-				currentNode, _ := stack.Pop()
+				node, _ := stack.Pop()
+				currentNode := *node
 				currentSize++
 				visitedNodes[currentNode] = true
 

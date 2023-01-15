@@ -27,7 +27,7 @@ func TestPush(t *testing.T) {
 
 	lastElement, _ := s.Peek()
 
-	if lastElement != expectedLastElement {
+	if *lastElement != expectedLastElement {
 		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
 	}
 }
@@ -52,7 +52,7 @@ func TestPop(t *testing.T) {
 
 	lastElement, _ := s.Pop()
 
-	if lastElement != expectedLastElement {
+	if *lastElement != expectedLastElement {
 		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
 	} else if s.capacity != expectedCapacity {
 		t.Errorf("Expected capacity %d, got %d", expectedCapacity, s.Size())
@@ -86,7 +86,7 @@ func TestPeek(t *testing.T) {
 
 	lastElement, _ := s.Peek()
 
-	if lastElement != expectedLastElement {
+	if *lastElement != expectedLastElement {
 		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
 	}
 }

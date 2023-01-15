@@ -150,7 +150,8 @@ func (t *BinarySearchTree) DepthFirstValues(capacity int) []int {
 	tempStack.Push(currentNode)
 
 	for !tempStack.IsEmpty() {
-		currentNode, _ = tempStack.Pop()
+		node, _ := tempStack.Pop()
+		currentNode = *node
 		result = append(result, currentNode.data)
 
 		if currentNode.HasChild() {

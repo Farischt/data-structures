@@ -11,8 +11,7 @@ type IGraph[T comparable] interface {
 	Add(node T) error
 	AddDirectedEdge(src T, dst T) error
 	AddUndirectedEdge(src T, dst T) error
-	HasPathBFS(src T, dst T) bool
-	HasPathDFS(src T, dst T) bool
+	HasPath(src T, dst T) bool
 	ComponentCount() int
 	LargestComponentSize() int
 	ShortestPath(src T, dst T) int
@@ -66,7 +65,7 @@ func (g *Graph[T]) AddUndirectedEdge(src T, dst T) error {
 	return err
 }
 
-func (g *Graph[T]) HasPathBFS(src T, dst T) bool {
+func (g *Graph[T]) HasPath(src T, dst T) bool {
 	// BFS Way
 	if !g.nodeExists(src) || !g.nodeExists(dst) {
 		return false
@@ -91,39 +90,6 @@ func (g *Graph[T]) HasPathBFS(src T, dst T) bool {
 			_, exist := visitedNodes[neighbor]
 			if !exist {
 				queue.Enqueue(neighbor)
-			}
-		}
-	}
-
-	return false
-}
-
-func (g *Graph[T]) HasPathDFS(src T, dst T) bool {
-	// DFS Way
-	if !g.nodeExists(src) || !g.nodeExists(dst) {
-		return false
-	} else if src == dst {
-		return true
-	}
-
-	visitedNodes := make(map[T]bool)
-	var stack stack.IStack[T] = stack.New[T](len(g.nodes))
-	stack.Push(src)
-
-	for !stack.IsEmpty() {
-		node, _ := stack.Pop()
-		currentNode := *node
-		visitedNodes[currentNode] = true
-
-		if currentNode == dst {
-			return true
-		}
-
-		for _, neighbor := range g.nodes[currentNode] {
-			// Enqueue all paths
-			_, exist := visitedNodes[neighbor]
-			if !exist {
-				stack.Push(neighbor)
 			}
 		}
 	}

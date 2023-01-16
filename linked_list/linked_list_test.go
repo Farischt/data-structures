@@ -5,7 +5,7 @@ import "testing"
 // Test the linked list
 func TestGetLast(t *testing.T) {
 	lastData := 300
-	ll := New()
+	ll := New[int]()
 	ll.InsertAtEnd(200)
 	ll.InsertAtEnd(lastData)
 
@@ -16,7 +16,7 @@ func TestGetLast(t *testing.T) {
 }
 
 func TestIsEmpty(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	if !ll.isEmpty() {
 		t.Errorf("Expected true, got false")
 	}
@@ -24,7 +24,7 @@ func TestIsEmpty(t *testing.T) {
 
 func TestInsertAtStart(t *testing.T) {
 	firstData := 200
-	ll := New()
+	ll := New[int]()
 	ll.InsertAtStart(firstData)
 	if ll.head.data != firstData {
 		t.Errorf("Expected %d, got %v", firstData, ll.head.data)
@@ -33,7 +33,7 @@ func TestInsertAtStart(t *testing.T) {
 
 func TestInsertAtEnd(t *testing.T) {
 	lastData := 300
-	ll := New()
+	ll := New[int]()
 	ll.InsertAtEnd(200)
 	ll.InsertAtEnd(lastData)
 	last := GetLast(ll.head)
@@ -43,7 +43,7 @@ func TestInsertAtEnd(t *testing.T) {
 }
 
 func TestDeleteFirstNode(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	firstNodeData := 200
 	secondNodeData := 300
 	ll.InsertAtEnd(firstNodeData)
@@ -58,7 +58,7 @@ func TestDeleteFirstNode(t *testing.T) {
 }
 
 func TestDeleteLastNode(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	previousNodeData := 400
 	lastNodeData := 500
 	ll.InsertAtEnd(100)
@@ -75,7 +75,7 @@ func TestDeleteLastNode(t *testing.T) {
 }
 
 func TestDeleteMiddleNode(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	middleNodeData := 400
 
 	ll.InsertAtEnd(100)
@@ -93,7 +93,7 @@ func TestDeleteMiddleNode(t *testing.T) {
 }
 
 func TestDeleteNode(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	dataToDelete := 200
 	ll.InsertAtEnd(dataToDelete)
 	ll.InsertAtEnd(300)
@@ -109,7 +109,7 @@ func TestDeleteNode(t *testing.T) {
 }
 
 func TestContains(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	firstNodeData := 200
 	secondNodeData := 300
 	ll.InsertAtEnd(firstNodeData)
@@ -121,7 +121,7 @@ func TestContains(t *testing.T) {
 }
 
 func TestToArray(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	nodesData := []int{200, 300}
 	ll.InsertAtEnd(nodesData[0])
 	ll.InsertAtEnd(nodesData[1])
@@ -136,7 +136,7 @@ func TestToArray(t *testing.T) {
 }
 
 func TestSize(t *testing.T) {
-	ll := New()
+	ll := New[int]()
 	expectedSize := 4
 	for i := 0; i < expectedSize; i++ {
 		ll.InsertAtEnd(i * 100)

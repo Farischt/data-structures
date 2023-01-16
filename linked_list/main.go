@@ -4,27 +4,54 @@ import (
 	"fmt"
 )
 
-type ILinkedList interface {
+type ILinkedList[T comparable] interface {
+	// isEmpty returns either if the linked list is empty or not.
+	// Time Complexity: O(1).
+	// Space Complexity: O(1).
 	isEmpty() bool
-	InsertAtStart(interface{}) *Node
-	InsertAtEnd(interface{}) *Node
-	DeleteNode(interface{})
-	Contains(interface{}) bool
-	toArray() []Node
+	// InsertAtStart insert a new node based on the data parameter, at the begining of the linked list.
+	// It returns a pointer to the inserted Node.
+	// Time Complexity: O(1).
+	// Space Complexity: O(1).
+	InsertAtStart(T) *Node[T]
+	// InsertAtEnd insert a new node based on the data parameter, at the end of the linked list.
+	// It returns a pointer to the inserted Node.
+	// Time Complexity: O(n).
+	// Space Complexity: O(1).
+	InsertAtEnd(T) *Node[T]
+	// DeleteNode deletes a node from the linked list based on the data parameter.
+	// Time Complexity: O(n).
+	// Space Complexity: O(1).
+	DeleteNode(T)
+	// Contains returns either if the linked list contains the data parameter or not.
+	// Time Complexity: O(n).
+	// Space Complexity: O(1).
+	Contains(T) bool
+	// toArray transform the linked list to an array of Nodes.
+	// Time Complexity: O(n).
+	// Space Complexity: O(n).
+	toArray() []Node[T]
+	// Size returns the size of the linked list.
+	// Time Complexity: O(n).
+	// Space Complexity: O(n).
 	Size() int
+	// GetLast returns the last node of the linked list.
+	// Time Complexity: O(n).
+	// Space Complexity: O(1).
+	GetLast(*Node[T]) *Node[T]
 }
 
-type LinkedList struct {
-	head *Node
+type LinkedList[T comparable] struct {
+	head *Node[T]
 }
 
-func New() *LinkedList {
-	return &LinkedList{
+func New[T comparable]() *LinkedList[T] {
+	return &LinkedList[T]{
 		head: nil,
 	}
 }
 
-func (ll *LinkedList) String() string {
+func (ll *LinkedList[T]) String() string {
 	if ll.isEmpty() {
 		return "nil"
 	}
@@ -38,14 +65,18 @@ func (ll *LinkedList) String() string {
 	return str
 }
 
-// IsEmpty returns either if the linked list is empty or not.
-func (ll *LinkedList) isEmpty() bool {
+// isEmpty returns either if the linked list is empty or not.
+// Time Complexity: O(1).
+// Space Complexity: O(1).
+func (ll *LinkedList[T]) isEmpty() bool {
 	return ll.head == nil
 }
 
 // InsertAtStart insert a new node based on the data parameter, at the begining of the linked list.
-// It returns a pointer to the inserted Node
-func (ll *LinkedList) InsertAtStart(data interface{}) *Node {
+// It returns a pointer to the inserted Node.
+// Time Complexity: O(1).
+// Space Complexity: O(1).
+func (ll *LinkedList[T]) InsertAtStart(data T) *Node[T] {
 	newNode := NewNode(data)
 	// Check if the list is empty
 	if ll.isEmpty() {
@@ -59,8 +90,10 @@ func (ll *LinkedList) InsertAtStart(data interface{}) *Node {
 }
 
 // InsertAtEnd insert a new node based on the data parameter, at the end of the linked list.
-// It returns a pointer to the inserted Node
-func (ll *LinkedList) InsertAtEnd(data interface{}) *Node {
+// It returns a pointer to the inserted Node.
+// Time Complexity: O(n).
+// Space Complexity: O(1).
+func (ll *LinkedList[T]) InsertAtEnd(data T) *Node[T] {
 	newNode := NewNode(data)
 
 	if ll.isEmpty() {
@@ -74,12 +107,14 @@ func (ll *LinkedList) InsertAtEnd(data interface{}) *Node {
 }
 
 // DeleteNode deletes a node from the linked list based on the data parameter.
-func (ll *LinkedList) DeleteNode(data interface{}) {
+// Time Complexity: O(n).
+// Space Complexity: O(1).
+func (ll *LinkedList[T]) DeleteNode(data T) {
 	if ll.isEmpty() {
 		return
 	}
 
-	var previousNode *Node = nil
+	var previousNode *Node[T] = nil
 	currentNode := ll.head
 
 	for currentNode != nil {
@@ -95,7 +130,10 @@ func (ll *LinkedList) DeleteNode(data interface{}) {
 
 }
 
-func (ll *LinkedList) Contains(data interface{}) bool {
+// Contains returns either if the linked list contains the data parameter or not.
+// Time Complexity: O(n).
+// Space Complexity: O(1).
+func (ll *LinkedList[T]) Contains(data interface{}) bool {
 	currentNode := ll.head
 	for currentNode != nil {
 		if currentNode.data == data {
@@ -106,11 +144,13 @@ func (ll *LinkedList) Contains(data interface{}) bool {
 	return false
 }
 
-// ToArray transform the linked list to an array of Nodes.
-func (ll *LinkedList) toArray() []Node {
+// toArray transform the linked list to an array of Nodes.
+// Time Complexity: O(n).
+// Space Complexity: O(n).
+func (ll *LinkedList[T]) toArray() []Node[T] {
 
 	currentNode := ll.head
-	var array []Node
+	var array []Node[T]
 
 	for currentNode != nil {
 		array = append(array, *currentNode)
@@ -120,13 +160,17 @@ func (ll *LinkedList) toArray() []Node {
 	return array
 }
 
-// Size returns the size of the linked list
-func (ll *LinkedList) Size() int {
+// Size returns the size of the linked list.
+// Time Complexity: O(n).
+// Space Complexity: O(n).
+func (ll *LinkedList[T]) Size() int {
 	return len(ll.toArray())
 }
 
 // GetLast returns the last node of the linked list.
-func GetLast(node *Node) *Node {
+// Time Complexity: O(n).
+// Space Complexity: O(1).
+func GetLast[T comparable](node *Node[T]) *Node[T] {
 	if node.next == nil {
 		return node
 	}

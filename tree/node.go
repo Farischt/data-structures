@@ -19,6 +19,8 @@ func NewNode(data int) *Node {
 }
 
 // HasChild returns true if the node has at least one child.
+// This is useful to know if the node is a leaf or not.
+// A leaf is a node that has no children.
 func (n *Node) HasChild() bool {
 	return n.left != nil || n.right != nil
 }

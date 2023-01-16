@@ -1,12 +1,12 @@
 package ll
 
-type Node struct {
-	data interface{}
-	next *Node
+type Node[T comparable] struct {
+	data T
+	next *Node[T]
 }
 
-func NewNode(data interface{}) *Node {
-	return &Node{
+func NewNode[T comparable](data T) *Node[T] {
+	return &Node[T]{
 		data: data,
 		next: nil,
 	}

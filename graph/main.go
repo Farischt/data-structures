@@ -7,13 +7,40 @@ import (
 )
 
 type IGraph[T comparable] interface {
+	// Check if node exist in a graph.
+	// Time Complexity: O(1).
+	// Space Complexity: O(1).
 	nodeExists(node T) bool
+	// Add a node to the graph and init it neighboors.
+	// Return an error if the node already exist.
+	// Time Complexity: O(1).
+	// Space Complexity: O(1).
 	Add(node T) error
+	// Add a directed edge between two nodes.
+	// Return an error if at least one of the nodes doesnt exist.
+	// Time Complexity: O(1).
+	// Space Complexity: O(1).
 	AddDirectedEdge(src T, dst T) error
+	// Add an undirected edge between two nodes.
+	// Return an error if at least one of the nodes doesnt exist.
+	// Time Complexity: O(1).
+	// Space Complexity: O(1).
 	AddUndirectedEdge(src T, dst T) error
+	// Check if there is a path between two nodes.
+	// Time Complexity: O(V + E).
+	// Space Complexity: O(V).
 	HasPath(src T, dst T) bool
+	// Count the number of components in the graph.
+	// Time Complexity: O(V + E).
+	// Space Complexity: O(V).
 	ComponentCount() int
+	// Find the size of the largest component in the graph.
+	// Time Complexity: O(V + E).
+	// Space Complexity: O(V).
 	LargestComponentSize() int
+	// Find the shortest path between two nodes.
+	// Time Complexity: O(V + E).
+	// Space Complexity: O(V).
 	ShortestPath(src T, dst T) int
 }
 
@@ -27,11 +54,18 @@ func New[T comparable]() *Graph[T] {
 	}
 }
 
+// Check if node exist in a graph.
+// Time Complexity: O(1).
+// Space Complexity: O(1).
 func (g *Graph[T]) nodeExists(node T) bool {
 	_, exist := g.nodes[node]
 	return exist
 }
 
+// Add a node to the graph and init it neighboors.
+// Return an error if the node already exist.
+// Time Complexity: O(1).
+// Space Complexity: O(1).
 func (g *Graph[T]) Add(node T) error {
 	// Check if node exist
 
@@ -43,6 +77,10 @@ func (g *Graph[T]) Add(node T) error {
 	return nil
 }
 
+// Add a directed edge between two nodes.
+// Return an error if at least one of the nodes doesnt exist.
+// Time Complexity: O(1).
+// Space Complexity: O(1).
 func (g *Graph[T]) AddDirectedEdge(src T, dst T) error {
 
 	if !g.nodeExists(src) || !g.nodeExists(dst) {
@@ -53,6 +91,10 @@ func (g *Graph[T]) AddDirectedEdge(src T, dst T) error {
 	return nil
 }
 
+// Add an undirected edge between two nodes.
+// Return an error if at least one of the nodes doesnt exist.
+// Time Complexity: O(1).
+// Space Complexity: O(1).
 func (g *Graph[T]) AddUndirectedEdge(src T, dst T) error {
 
 	err := g.AddDirectedEdge(src, dst)
@@ -65,6 +107,9 @@ func (g *Graph[T]) AddUndirectedEdge(src T, dst T) error {
 	return err
 }
 
+// Check if there is a path between two nodes.
+// Time Complexity: O(V + E).
+// Space Complexity: O(V).
 func (g *Graph[T]) HasPath(src T, dst T) bool {
 	// BFS Way
 	if !g.nodeExists(src) || !g.nodeExists(dst) {
@@ -97,6 +142,9 @@ func (g *Graph[T]) HasPath(src T, dst T) bool {
 	return false
 }
 
+// Count the number of components in the graph.
+// Time Complexity: O(V + E).
+// Space Complexity: O(V).
 func (g *Graph[T]) ComponentCount() int {
 	visitedNodes := make(map[T]bool)
 	count := 0
@@ -128,6 +176,9 @@ func (g *Graph[T]) ComponentCount() int {
 	return count
 }
 
+// Find the size of the largest component in the graph.
+// Time Complexity: O(V + E).
+// Space Complexity: O(V).
 func (g *Graph[T]) LargestComponentSize() int {
 	visitedNodes := make(map[T]bool)
 	maxSize := 0
@@ -169,6 +220,9 @@ type Element[T any] struct {
 	distance int
 }
 
+// Find the shortest path between two nodes.
+// Time Complexity: O(V + E).
+// Space Complexity: O(V).
 func (g *Graph[T]) ShortestPath(src T, dst T) int {
 	visitedNodes := make(map[T]bool)
 	queue := queue.New[Element[T]](len(g.nodes))

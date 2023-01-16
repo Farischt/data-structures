@@ -1,9 +1,10 @@
 package tree
 
 import (
-	"ds/queue"
-	"ds/stack"
 	"fmt"
+
+	"github.com/farischt/ds/queue"
+	"github.com/farischt/ds/stack"
 )
 
 type IBinarySearchTree interface {

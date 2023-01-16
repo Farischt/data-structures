@@ -1,9 +1,10 @@
 package graph
 
 import (
-	"ds/queue"
-	"ds/stack"
 	"fmt"
+
+	"github.com/farischt/ds/queue"
+	"github.com/farischt/ds/stack"
 )
 
 type IGraph[T comparable] interface {
@@ -215,6 +216,7 @@ func (g *Graph[T]) LargestComponentSize() int {
 	return maxSize
 }
 
+// Type element used to store the node and the distance from the source.
 type Element[T any] struct {
 	node     T
 	distance int

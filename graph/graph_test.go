@@ -198,3 +198,62 @@ func Test_LargestComponentSizeWithTwoComponents(t *testing.T) {
 		t.Errorf("largest component size should be %d, test largest component size with two components.", expectedSize)
 	}
 }
+
+
+func Test_ShortestPath(t *testing.T) {
+	src := 1
+	dst := 5
+	graph := New[int]()
+	graph.Add(src)
+	graph.Add(2)
+	graph.Add(3)
+	graph.Add(4)
+	graph.Add(dst)
+	graph.AddDirectedEdge(src, 2)
+	graph.AddDirectedEdge(2, 3)
+	graph.AddDirectedEdge(3, 4)
+	graph.AddDirectedEdge(4, dst)
+	expectedPathLen := 4 
+	path := graph.ShortestPath(src, dst)
+	if path != expectedPathLen {
+		t.Errorf("shortest path should be %v lenght, test shortest path.", expectedPathLen)
+	}
+}
+
+func Test_ShortestPathWithInvalidSrc(t *testing.T) {
+	src := 0
+	dst := 5
+	graph := New[int]()
+	graph.Add(1)
+	graph.Add(2)
+	graph.Add(3)
+	graph.Add(4)
+	graph.Add(dst)
+	graph.AddDirectedEdge(1, 2)
+	graph.AddDirectedEdge(2, 3)
+	graph.AddDirectedEdge(3, 4)
+	graph.AddDirectedEdge(4, dst)
+	path := graph.ShortestPath(src, dst)
+	if path != -1 {
+		t.Errorf("shortest path should be -1, test shortest path with invalid src.")
+	}
+}
+
+func Test_ShortestPathWithInvalidDst(t *testing.T) {
+	src := 1
+	dst := 0
+	graph := New[int]()
+	graph.Add(src)
+	graph.Add(2)
+	graph.Add(3)
+	graph.Add(4)
+	graph.Add(5)
+	graph.AddDirectedEdge(src, 2)
+	graph.AddDirectedEdge(2, 3)
+	graph.AddDirectedEdge(3, 4)
+	graph.AddDirectedEdge(4, 5)
+	path := graph.ShortestPath(src, dst)
+	if path != -1 {
+		t.Errorf("shortest path should be -1, test shortest path with invalid dst.")
+	}
+}

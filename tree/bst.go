@@ -6,15 +6,43 @@ import (
 	"fmt"
 )
 
-type ITree interface {
+type IBinarySearchTree interface {
+	// Insert a new node in the tree, if the tree is empty the new node will be the root.
+	// Time complexity: O(log(n)).
+	// Space complexity: O(1).
 	Insert(data int) *Node
+	// Remove a node from the tree.
+	// Time complexity: O(log(n)).
+	// Space complexity: O(1).
 	Remove(data int)
+	// Search a node in the tree and return it.
+	// Time complexity: O(log(n)).
+	// Space complexity: O(1).
 	Search(data int) *Node
+	// InOrderTraversal returns the values of the tree in order.
+	// Time complexity: O(n).
+	// Space complexity: O(n).
 	InOrderTraversal()
+	// DepthFirstValues returns the values of the tree in depth first order.
+	// Time complexity: O(n).
+	// Space complexity: O(n).
 	DepthFirstValues(int) []int
+	// BreathFirstValues returns the values of the tree in breath first order.
+	// Time complexity: O(n).
+	// Space complexity: O(n).
 	BreathFirstValues(int) []int
+	// FindMinimumValue returns the minimum value of the tree.
+	// Time complexity: O(n).
+	// Space complexity: O(1).
 	FindMinimumValue() *Node
+	// BreathFirstSearch returns the node with the given data.
+	// Time complexity: O(n).
+	// Space complexity: O(n).
 	BreathFirstSearch(data int, capacity int) *Node
+	// FindInorderSuccessor returns the inorder successor of the given node.
+	// The inorder successor is the node that comes after the given node in an in-order traversal.
+	// Time complexity: O(n).
+	// Space complexity: O(1).
 	FindInorderSuccessor(data int) *Node
 }
 

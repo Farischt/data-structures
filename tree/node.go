@@ -4,7 +4,7 @@ type Node struct {
 	data   int
 	left   *Node
 	right  *Node
-	Parent *Node
+	parent *Node
 }
 
 type Direction string
@@ -31,8 +31,13 @@ func (n *Node) HasTwoChild() bool {
 }
 
 // IsFromRight returns true if the node is the right child of the parent.
-func (n *Node) IsFromRight(parentNode *Node) bool {
-	return n == parentNode.right
+func (n *Node) IsFromRight() bool {
+
+	if n.parent == nil { 
+		return false
+	}
+
+	return n == n.parent.right
 }
 
 // RemoveNodeWithTwoChild removes a node with two children.
@@ -57,7 +62,7 @@ func (currentNode *Node) RemoveNodeWithTwoChild() {
 }
 
 // RemoveNodeWithOneChild removes a node with one child.
-func (currentNode *Node) RemoveNodeWithOneChild(parentNode *Node, t *BinarySearchTree, direction Direction) {
+func (currentNode *Node) RemoveNodeWithOneChild(t *BinarySearchTree, direction Direction) {
 	var newNode *Node = nil
 	switch direction {
 	case Left:
@@ -68,20 +73,20 @@ func (currentNode *Node) RemoveNodeWithOneChild(parentNode *Node, t *BinarySearc
 
 	if currentNode == t.root {
 		t.root = newNode
-	} else if currentNode.IsFromRight(parentNode) {
-		parentNode.right = newNode
+	} else if currentNode.IsFromRight() {
+		currentNode.parent.right = newNode
 	} else {
-		parentNode.left = newNode
+		currentNode.parent.left = newNode
 	}
 }
 
 // RemoveNodeWithNoChild removes a node with no child. This is the case when the node is a leaf. In this case we just need to remove the reference to the node from the parent.
-func (currentNode *Node) RemoveLeafNode(parentNode *Node, t *BinarySearchTree) {
+func (currentNode *Node) RemoveLeafNode(t *BinarySearchTree) {
 	if currentNode == t.root {
 		t.root = nil
-	} else if currentNode.IsFromRight(parentNode) {
-		parentNode.right = nil
+	} else if currentNode.IsFromRight() {
+		currentNode.parent.right = nil
 	} else {
-		parentNode.left = nil
+		currentNode.parent.left = nil
 	}
 }

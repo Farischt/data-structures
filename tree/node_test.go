@@ -41,12 +41,15 @@ func TestNode_HasTwoChild(t *testing.T) {
 
 func TestNode_IsFromRight(t *testing.T) {
 	node := NewNode(1)
-	parentNode := NewNode(2)
-	if node.IsFromRight(parentNode) {
+	childNode := NewNode(2)
+	
+	if childNode.IsFromRight() {
 		t.Errorf("node is not from right")
 	}
-	parentNode.right = node
-	if !node.IsFromRight(parentNode) {
+	
+	node.right = childNode
+	childNode.parent = node
+	if !childNode.IsFromRight() {
 		t.Errorf("node is from right")
 	}
 }
@@ -70,7 +73,7 @@ func Test_RemoveRootNodeWithLeftChild(t *testing.T) {
 	node.left = NewNode(5)
 	tree.root = node
 
-	node.RemoveNodeWithOneChild(nil, tree, Left)
+	node.RemoveNodeWithOneChild(tree, Left)
 	if tree.root.data != 5 {
 		t.Errorf("Root node is not 5. Delete root node with left child")
 	}
@@ -82,7 +85,7 @@ func Test_RemoveRootNodeWithRightChild(t *testing.T) {
 	node.right = NewNode(15)
 	tree.root = node
 
-	node.RemoveNodeWithOneChild(nil, tree, Right)
+	node.RemoveNodeWithOneChild(tree, Right)
 	if tree.root.data != 15 {
 		t.Errorf("Root node is not 15. Delete root node with right child")
 	}
@@ -93,7 +96,7 @@ func Test_RemoveRootNodeWithNoChild(t *testing.T) {
 	node := NewNode(10)
 	tree.root = node
 
-	node.RemoveLeafNode(nil, tree)
+	node.RemoveLeafNode(tree)
 	if tree.root != nil {
 		t.Errorf("Root node is not nil. Delete root node with no child")
 	}
@@ -103,12 +106,13 @@ func Test_RemoveMiddleNodeWithLeftChild(t *testing.T) {
 	tree := New(nil)
 	parentNode := NewNode(10)
 	currentNode := NewNode(5)
+	currentNode.parent = parentNode
 	parentNode.left = currentNode
 	currentNodeLeftChild := NewNode(3)
 	currentNode.left = currentNodeLeftChild
 	tree.root = parentNode
 
-	currentNode.RemoveNodeWithOneChild(parentNode, tree, Left)
+	currentNode.RemoveNodeWithOneChild(tree, Left)
 	if parentNode.left.data != 3 {
 		t.Errorf("Parent child node is not 3. Delete middle node with left child")
 	}
@@ -118,27 +122,27 @@ func Test_RemoveMiddleNodeWithRightChild(t *testing.T) {
 	tree := New(nil)
 	parentNode := NewNode(10)
 	currentNode := NewNode(15)
+	currentNode.parent = parentNode
 	parentNode.right = currentNode
 	currentNodeRightChild := NewNode(25)
 	currentNode.left = currentNodeRightChild
 	tree.root = parentNode
 
-	currentNode.RemoveNodeWithOneChild(parentNode, tree, Left)
+	currentNode.RemoveNodeWithOneChild(tree, Left)
 	if parentNode.right.data != 25 {
 		t.Errorf("Parent child node is not 3. Delete middle node with right child")
 	}
 }
-
-// TODO : Test case for RemoveMiddleNodeWithTwoChild
 
 func Test_RemoveLeafNode(t *testing.T) {
 	tree := New(nil)
 	parentNode := NewNode(10)
 	currentNode := NewNode(5)
 	parentNode.left = currentNode
+	currentNode.parent = parentNode
 	tree.root = parentNode
 
-	currentNode.RemoveLeafNode(parentNode, tree)
+	currentNode.RemoveLeafNode(tree)
 	if parentNode.left != nil {
 		t.Errorf("Parent child node is not nil. Delete leaf node")
 	}

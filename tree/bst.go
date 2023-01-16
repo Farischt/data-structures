@@ -61,7 +61,7 @@ func (t *BinarySearchTree) Insert(data int) *Node {
 	newNode := NewNode(data)
 
 	if t.root == nil {
-		newNode.Parent = nil
+		newNode.parent = nil
 		t.root = newNode
 		return newNode
 	}
@@ -71,14 +71,14 @@ func (t *BinarySearchTree) Insert(data int) *Node {
 	for currentNode != nil {
 		if data <= currentNode.data {
 			if currentNode.left == nil {
-				newNode.Parent = currentNode
+				newNode.parent = currentNode
 				currentNode.left = newNode
 				return newNode
 			}
 			currentNode = currentNode.left
 		} else {
 			if currentNode.right == nil {
-				newNode.Parent = currentNode
+				newNode.parent = currentNode
 				currentNode.right = newNode
 				return newNode
 			}
@@ -96,11 +96,9 @@ func (t *BinarySearchTree) Remove(data int) {
 	}
 
 	var currentNode *Node = t.root
-	var parentNode *Node = nil
-
+	
 	// Find the node to delete
 	for currentNode != nil && currentNode.data != data {
-		parentNode = currentNode
 		if currentNode.data > data {
 			currentNode = currentNode.left
 		} else {
@@ -117,16 +115,16 @@ func (t *BinarySearchTree) Remove(data int) {
 		return
 	} else if currentNode.left != nil {
 		// In this case the currentNode to delete only has a left child
-		currentNode.RemoveNodeWithOneChild(parentNode, t, Left)
+		currentNode.RemoveNodeWithOneChild(t, Left)
 		return
 	} else if currentNode.right != nil {
 		// In this case the currentNode to delete only has a right child
-		currentNode.RemoveNodeWithOneChild(parentNode, t, Right)
+		currentNode.RemoveNodeWithOneChild(t, Right)
 		return
 	} else {
 		// In this case the currentNode to delete has no child
 		// We need to cut the relation
-		currentNode.RemoveLeafNode(parentNode, t)
+		currentNode.RemoveLeafNode(t)
 		return
 	}
 
@@ -300,13 +298,13 @@ func (t *BinarySearchTree) FindInorderSuccessor(data int) *Node {
 		return currentNode
 	} else {
 
-		for currentNode.Parent != nil && currentNode.IsFromRight(currentNode.Parent) {
-			if currentNode.Parent.Parent == nil {
+		for currentNode.parent != nil && currentNode.IsFromRight() {
+			if currentNode.parent.parent == nil {
 				return nil
 			}
-			currentNode = currentNode.Parent
+			currentNode = currentNode.parent
 		}
 
-		return currentNode.Parent
+		return currentNode.parent
 	}
 }

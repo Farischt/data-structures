@@ -15,16 +15,17 @@ func main() {
 	graph.Add(3)
 	graph.Add(4)
 	graph.Add(5)
+	graph.Add(6)
+	graph.Add(7)
 
 	graph.AddUndirectedEdge(1, 2)
 	graph.AddUndirectedEdge(2, 3)
-	graph.AddUndirectedEdge(3, 5)
-	graph.AddUndirectedEdge(1, 4)
+	graph.AddUndirectedEdge(3, 4)
 	graph.AddUndirectedEdge(4, 5)
+
+	graph.AddUndirectedEdge(6, 7)
 
 	fmt.Println(graph)
 	fmt.Println(graph.ComponentCount())
-	fmt.Println(graph.HasPathBFS(3, 1))
 	fmt.Println(graph.LargestComponentSize())
-	fmt.Println(graph.ShortestPath(3, 1))
 }

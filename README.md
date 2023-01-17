@@ -34,8 +34,6 @@ This project identifies the most commonly used data structures in software engin
 
 This project is also a go package via the following command :
 
-## **Currently not a package yet**
-
 ```bash
 go get github.com/farischt/ds
 ```

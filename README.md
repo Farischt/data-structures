@@ -22,4 +22,4 @@ Here is a list of the different packages :
 
 `ds/tree` and `ds/linked_list` have each a separated `Node` structure.
 
-For more information about the various methods please refere to the package documentation.
+For more information about the various methods please refere to the [package documentation](https://pkg.go.dev/github.com/farischt/ds).

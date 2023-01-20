@@ -10,7 +10,7 @@ go get github.com/farischt/ds
 
 ## Packages
 
-The project currently contains 5 different packages, one for each implemented data structure.
+The project currently contains 6 different packages, one for each implemented data structure.
 
 Here is a list of the different packages :
 
@@ -19,6 +19,7 @@ Here is a list of the different packages :
 - `ds/linked_list` for linked lists.
 - `ds/tree` for trees.
 - `ds/graph` for binary graphs.
+- `ds/heap` for heaps.
 
 `ds/tree` and `ds/linked_list` have each a separated `Node` structure.
 

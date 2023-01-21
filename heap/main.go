@@ -53,13 +53,13 @@ type IHeap[T utils.Number] interface {
 	// Returns an error if the heap is empty.
 	// The time complexity is O(log(n)).
 	// The space complexity is O(1).
-	Pop() (*T, error)
+	Pop() (*Item[T], error)
 	// Returns the top element of the heap without removing it.
 	// The top element is the element that satisfies the heap property.
 	// Returns an error if the heap is empty.
 	// The time complexity is O(1).
 	// The space complexity is O(1).
-	Top() (*T, error)
+	Top() (*Item[T], error)
 }
 
 type Heap[T utils.Number] struct {

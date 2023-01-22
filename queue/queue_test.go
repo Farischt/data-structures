@@ -29,9 +29,10 @@ func TestEnqueue(t *testing.T) {
 func TestEnqueueFullQueue(t *testing.T) {
 	q := New[int](1)
 	q.Enqueue(10)
-	err := q.Enqueue(20)
-	if err == nil {
-		t.Errorf("Expected error, got nil")
+	size := q.Size()
+	q.Enqueue(20)
+	if q.Size() != size+1 {
+		t.Errorf("Should increase the size of the queue")
 	}
 }
 

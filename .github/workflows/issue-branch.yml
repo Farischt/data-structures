@@ -1,3 +1,11 @@
 defaultBranch: "dev"
-openDraftPR: true
+openPR: true
 autoCloseIssue: true
+copyIssueDescriptionToPR: true
+copyIssueLabelsToPR: true
+copyIssueAssigneeToPR: true
+copyIssueProjectsToPR: true
+copyIssueMilestoneToPR: true
+prSkipCI: true
+commentMessage: "Branch ${branchName} created for issue: ${issue.title}"
+branchName: "${issue.number}-${issue.title,}"

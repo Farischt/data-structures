@@ -12,10 +12,10 @@ type IStack[T any] interface {
 	// Space complexity: O(1).
 	IsEmpty() bool
 	// Push adds a new element to the top of the stack.
-	// Returns an error if the stack is full.
+	// If the stack is full it will increment the capacity.
 	// Time complexity: O(1).
 	// Space complexity: O(1).
-	Push(T) error
+	Push(T)
 	// Pop removes the top element from the stack.
 	// Returns an error if the stack is empty.
 	// Time complexity: O(1).
@@ -67,16 +67,16 @@ func (s *Stack[T]) IsEmpty() bool {
 }
 
 // Push adds a new element to the top of the stack.
-// Returns an error if the stack is full.
+// If the stack is full it will increment the capacity.
 // Time complexity: O(1).
 // Space complexity: O(1).
-func (s *Stack[T]) Push(data T) error {
+func (s *Stack[T]) Push(data T) {
 	if s.IsFull() {
-		return fmt.Errorf("stack is full")
+		// Increment the capacity of the stack.
+		s.capacity++
 	}
 
 	s.storage = append(s.storage, data)
-	return nil
 }
 
 // Size returns the size of the stack.

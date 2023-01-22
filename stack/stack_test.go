@@ -35,10 +35,11 @@ func TestPush(t *testing.T) {
 func TestPushFullStack(t *testing.T) {
 	s := New[int64](1)
 	s.Push(10)
-	err := s.Push(20)
+	size := s.Size()
+	s.Push(20)
 
-	if err == nil {
-		t.Errorf("Expected error, got nil")
+	if s.Size() != size+1 {
+		t.Errorf("should increase the size of the stack")
 	}
 }
 

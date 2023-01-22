@@ -23,6 +23,11 @@ func Test_IsEmpty(t *testing.T) {
 	if !heap.isEmpty() {
 		t.Error("should be empty")
 	}
+
+	heap.data = append(heap.data, *NewItem(0, nil))
+	if heap.isEmpty() {
+		t.Error("should not be empty")
+	}
 }
 
 func Test_HeapLess(t *testing.T) {
@@ -136,22 +141,42 @@ func Test_IsInBound(t *testing.T) {
 	}
 }
 
-func Test_HeapBubbleUp(t *testing.T) {
+func Test_HeapUp(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	firstItem := NewItem(0, nil)
 	secondItem := NewItem(1, nil)
 
-	heap.data = append(heap.data, *firstItem)
 	heap.data = append(heap.data, *secondItem)
+	heap.data = append(heap.data, *firstItem)
 
 	heap.up(1)
 
-	// if heap.data[0] != *secondItem {
-	// 	t.Error("should bubble up correctly")
-	// } else if heap.data[1] != *firstItem {
-	// 	t.Error("should bubble up correctly")
-	// }
+	if heap.data[0] != *firstItem {
+		t.Error("should bubble up correctly")
+	} else if heap.data[1] != *secondItem {
+		t.Error("should bubble up correctly")
+	}
+}
+
+func Test_HeapDown(t *testing.T) {
+	heap := New[int](MinHeap)
+
+	firstItem := NewItem(0, nil)
+	secondItem := NewItem(5, nil)
+	thirdItem := NewItem(3, nil)
+
+	heap.data = append(heap.data, *secondItem)
+	heap.data = append(heap.data, *firstItem)
+	heap.data = append(heap.data, *thirdItem)
+
+	heap.down(0)
+
+	if heap.data[0] != *firstItem {
+		t.Error("should bubble down correctly")
+	} else if heap.data[1] != *secondItem {
+		t.Error("should bubble down correctly")
+	}
 }
 
 func Test_HeapPush(t *testing.T) {

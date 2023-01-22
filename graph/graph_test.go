@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_New(t *testing.T) {
+func TestNew(t *testing.T) {
 	graph := New[int]()
 	fmt.Println(graph.nodes)
 	if graph.nodes == nil {
@@ -13,7 +13,7 @@ func Test_New(t *testing.T) {
 	}
 }
 
-func Test_Add(t *testing.T) {
+func TestAdd(t *testing.T) {
 	data := 1
 	graph := New[int]()
 	graph.Add(data)
@@ -22,7 +22,7 @@ func Test_Add(t *testing.T) {
 	}
 }
 
-func Test_AddDirectedEdge(t *testing.T) {
+func TestAddDirectedEdge(t *testing.T) {
 	src := 1
 	dst := 2
 	graph := New[int]()
@@ -34,7 +34,7 @@ func Test_AddDirectedEdge(t *testing.T) {
 	}
 }
 
-func Test_AddUndirectedEdge(t *testing.T) {
+func TestAddUndirectedEdge(t *testing.T) {
 	src := 1
 	dst := 2
 	graph := New[int]()
@@ -49,7 +49,7 @@ func Test_AddUndirectedEdge(t *testing.T) {
 	}
 }
 
-func Test_HasPath(t *testing.T) {
+func TestHasPath(t *testing.T) {
 	src := 1
 	dst := 5
 	graph := New[int]()
@@ -67,7 +67,7 @@ func Test_HasPath(t *testing.T) {
 	}
 }
 
-func Test_HasPathWithInvalidSrc(t *testing.T) {
+func TestHasPathWithInvalidSrc(t *testing.T) {
 	src := 0
 	dst := 5
 	graph := New[int]()
@@ -85,7 +85,7 @@ func Test_HasPathWithInvalidSrc(t *testing.T) {
 	}
 }
 
-func Test_HasPathWithInvalidDst(t *testing.T) {
+func TestHasPathWithInvalidDst(t *testing.T) {
 	src := 1
 	dst := 0
 	graph := New[int]()
@@ -103,7 +103,7 @@ func Test_HasPathWithInvalidDst(t *testing.T) {
 	}
 }
 
-func Test_HasPathWithSameSrcDst(t *testing.T) {
+func TestHasPathWithSameSrcDst(t *testing.T) {
 	src := 1
 	graph := New[int]()
 	graph.Add(src)
@@ -113,7 +113,7 @@ func Test_HasPathWithSameSrcDst(t *testing.T) {
 	}
 }
 
-func Test_ComponentCount(t *testing.T) {
+func TestComponentCount(t *testing.T) {
 	expectedCount := 1
 	graph := New[int]()
 	graph.Add(1)
@@ -125,7 +125,7 @@ func Test_ComponentCount(t *testing.T) {
 	}
 }
 
-func Test_ComponentCountEmpty(t *testing.T) {
+func TestComponentCountEmpty(t *testing.T) {
 	expectedCount := 0
 	graph := New[int]()
 
@@ -134,7 +134,7 @@ func Test_ComponentCountEmpty(t *testing.T) {
 	}
 }
 
-func Test_ComponentCountWithTwoComponents(t *testing.T) {
+func TestComponentCountWithTwoComponents(t *testing.T) {
 	expectedCount := 2
 	graph := New[int]()
 	graph.Add(1)
@@ -150,7 +150,7 @@ func Test_ComponentCountWithTwoComponents(t *testing.T) {
 	}
 }
 
-func Test_LargestComponentSizeWithOneComponent(t *testing.T) {
+func TestLargestComponentSizeWithOneComponent(t *testing.T) {
 	expectedSize := 5
 	graph := New[int]()
 	graph.Add(1)
@@ -172,7 +172,7 @@ func Test_LargestComponentSizeWithOneComponent(t *testing.T) {
 	}
 }
 
-func Test_LargestComponentSizeWithTwoComponents(t *testing.T) {
+func TestLargestComponentSizeWithTwoComponents(t *testing.T) {
 	expectedSize := 5
 	graph := New[int]()
 	graph.Add(1)
@@ -199,8 +199,7 @@ func Test_LargestComponentSizeWithTwoComponents(t *testing.T) {
 	}
 }
 
-
-func Test_ShortestPath(t *testing.T) {
+func TestShortestPath(t *testing.T) {
 	src := 1
 	dst := 5
 	graph := New[int]()
@@ -213,14 +212,14 @@ func Test_ShortestPath(t *testing.T) {
 	graph.AddDirectedEdge(2, 3)
 	graph.AddDirectedEdge(3, 4)
 	graph.AddDirectedEdge(4, dst)
-	expectedPathLen := 4 
+	expectedPathLen := 4
 	path := graph.ShortestPath(src, dst)
 	if path != expectedPathLen {
 		t.Errorf("shortest path should be %v lenght, test shortest path.", expectedPathLen)
 	}
 }
 
-func Test_ShortestPathWithInvalidSrc(t *testing.T) {
+func TestShortestPathWithInvalidSrc(t *testing.T) {
 	src := 0
 	dst := 5
 	graph := New[int]()
@@ -239,7 +238,7 @@ func Test_ShortestPathWithInvalidSrc(t *testing.T) {
 	}
 }
 
-func Test_ShortestPathWithInvalidDst(t *testing.T) {
+func TestShortestPathWithInvalidDst(t *testing.T) {
 	src := 1
 	dst := 0
 	graph := New[int]()

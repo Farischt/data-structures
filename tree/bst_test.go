@@ -2,14 +2,14 @@ package tree
 
 import "testing"
 
-func Test_New(t *testing.T) {
+func TestNew(t *testing.T) {
 	tree := New(nil)
 	if tree.root != nil {
 		t.Errorf("root is not nil, test new tree.")
 	}
 }
 
-func Test_Insert(t *testing.T) {
+func TestInsert(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(1)
 	if tree.root.data != 1 {
@@ -25,7 +25,7 @@ func Test_Insert(t *testing.T) {
 	}
 }
 
-func Test_RemoveNonExistingNode(t *testing.T) {
+func TestRemoveNonExistingNode(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(1)
 	tree.Remove(2)
@@ -34,7 +34,7 @@ func Test_RemoveNonExistingNode(t *testing.T) {
 	}
 }
 
-func Test_RemoveNodeWithTwoChildren(t *testing.T) {
+func TestRemoveNodeWithTwoChildren(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(1)
 	tree.Insert(2)
@@ -46,7 +46,7 @@ func Test_RemoveNodeWithTwoChildren(t *testing.T) {
 	}
 }
 
-func Test_RemoveNodeWithLeftChild(t *testing.T) {
+func TestRemoveNodeWithLeftChild(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(2)
 	tree.Insert(1)
@@ -57,7 +57,7 @@ func Test_RemoveNodeWithLeftChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveNodeWithRightChild(t *testing.T) {
+func TestRemoveNodeWithRightChild(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(1)
 	tree.Insert(2)
@@ -68,7 +68,7 @@ func Test_RemoveNodeWithRightChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveNodeWithNoChild(t *testing.T) {
+func TestRemoveNodeWithNoChild(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(1)
 	tree.Remove(1)
@@ -78,7 +78,7 @@ func Test_RemoveNodeWithNoChild(t *testing.T) {
 	}
 }
 
-func Test_Search(t *testing.T) {
+func TestSearch(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(1)
 	tree.Insert(2)
@@ -94,7 +94,7 @@ func Test_Search(t *testing.T) {
 	}
 }
 
-func Test_DepthFirstValues(t *testing.T) {
+func TestDepthFirstValues(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(10)
 	tree.Insert(15)
@@ -111,7 +111,7 @@ func Test_DepthFirstValues(t *testing.T) {
 	}
 }
 
-func Test_EmptyDepthFirstValues(t *testing.T) {
+func TestEmptyDepthFirstValues(t *testing.T) {
 	tree := New(nil)
 	values := tree.DepthFirstValues(4)
 	if len(values) != 0 {
@@ -119,7 +119,7 @@ func Test_EmptyDepthFirstValues(t *testing.T) {
 	}
 }
 
-func Test_BreathFirstValues(t *testing.T) {
+func TestBreathFirstValues(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(10)
 	tree.Insert(15)
@@ -135,7 +135,7 @@ func Test_BreathFirstValues(t *testing.T) {
 	}
 }
 
-func Test_EmptyBreathFirstValues(t *testing.T) {
+func TestEmptyBreathFirstValues(t *testing.T) {
 	tree := New(nil)
 	values := tree.BreathFirstValues(3)
 	if len(values) != 0 {
@@ -143,7 +143,7 @@ func Test_EmptyBreathFirstValues(t *testing.T) {
 	}
 }
 
-func Test_FindMinimumValue(t *testing.T) {
+func TestFindMinimumValue(t *testing.T) {
 	tree := New(nil)
 	node := NewNode(8)
 	tree.Insert(10)
@@ -156,7 +156,7 @@ func Test_FindMinimumValue(t *testing.T) {
 	}
 }
 
-func Test_BreathFirstSearch(t *testing.T) {
+func TestBreathFirstSearch(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(10)
 	tree.Insert(15)
@@ -172,7 +172,7 @@ func Test_BreathFirstSearch(t *testing.T) {
 	}
 }
 
-func Test_EmptyBreathFirstSearch(t *testing.T) {
+func TestEmptyBreathFirstSearch(t *testing.T) {
 	tree := New(nil)
 	node := tree.BreathFirstSearch(8, 4)
 	if node != nil {
@@ -180,7 +180,7 @@ func Test_EmptyBreathFirstSearch(t *testing.T) {
 	}
 }
 
-func Test_BreathFirstSearchRoot(t *testing.T) {
+func TestBreathFirstSearchRoot(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(10)
 	node := tree.BreathFirstSearch(10, 4)
@@ -189,7 +189,7 @@ func Test_BreathFirstSearchRoot(t *testing.T) {
 	}
 }
 
-func Test_FindInorderSuccessor(t *testing.T) {
+func TestFindInorderSuccessor(t *testing.T) {
 	tree := New(nil)
 	tree.Insert(20)
 	tree.Insert(25)

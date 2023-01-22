@@ -2,19 +2,34 @@ package stack
 
 import "testing"
 
+func TestNew(t *testing.T) {
+	s := New[int64](1)
+	if s == nil {
+		t.Errorf("should create new stack, test new stack")
+	}
+}
+
+func TestString(t *testing.T) {
+	s := New[int64](1)
+	s.Push(10)
+	if s.String() != "\n------- Stack --------\n10\n--\n------- End --------\n" {
+		t.Errorf("should return correct string, test string")
+	}
+}
+
 func TestIsFull(t *testing.T) {
 	s := New[int64](2)
 	s.Push(10)
 	s.Push(20)
 	if !s.IsFull() {
-		t.Errorf("Expected true, got false")
+		t.Errorf("should be full, test stack is full")
 	}
 }
 
 func TestIsEmpty(t *testing.T) {
 	s := New[int64](1)
 	if !s.IsEmpty() {
-		t.Errorf("Expected true, got false")
+		t.Errorf("should be empty, test stack is empty")
 	}
 }
 
@@ -35,10 +50,11 @@ func TestPush(t *testing.T) {
 func TestPushFullStack(t *testing.T) {
 	s := New[int64](1)
 	s.Push(10)
-	err := s.Push(20)
+	size := s.Size()
+	s.Push(20)
 
-	if err == nil {
-		t.Errorf("Expected error, got nil")
+	if s.Size() != size+1 {
+		t.Errorf("should increase the size of the stack")
 	}
 }
 
@@ -53,9 +69,9 @@ func TestPop(t *testing.T) {
 	lastElement, _ := s.Pop()
 
 	if *lastElement != expectedLastElement {
-		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
+		t.Errorf("Expected %v, got %v, test pop", expectedLastElement, lastElement)
 	} else if s.capacity != expectedCapacity {
-		t.Errorf("Expected capacity %d, got %d", expectedCapacity, s.Size())
+		t.Errorf("Expected capacity %d, got %d, test pop", expectedCapacity, s.Size())
 	}
 }
 
@@ -64,7 +80,7 @@ func TestPopEmptyStack(t *testing.T) {
 	_, err := s.Pop()
 
 	if err == nil {
-		t.Errorf("Expected error, got nil")
+		t.Errorf("Expected error, got nil, test pop empty stack")
 	}
 }
 
@@ -75,7 +91,7 @@ func TestSize(t *testing.T) {
 	s.Push(20)
 
 	if s.Size() != expectedSize {
-		t.Errorf("Expected %d, got %d", expectedSize, s.Size())
+		t.Errorf("Expected %d, got %d, test size", expectedSize, s.Size())
 	}
 }
 
@@ -87,7 +103,7 @@ func TestPeek(t *testing.T) {
 	lastElement, _ := s.Peek()
 
 	if *lastElement != expectedLastElement {
-		t.Errorf("Expected %v, got %v", expectedLastElement, lastElement)
+		t.Errorf("Expected %v, got %v, test peek", expectedLastElement, lastElement)
 	}
 }
 
@@ -96,6 +112,6 @@ func TestPeekEmptyStack(t *testing.T) {
 	_, err := s.Peek()
 
 	if err == nil {
-		t.Errorf("Expected nil, got %v", err)
+		t.Errorf("Expected nil, got %v, test peek empty stack", err)
 	}
 }

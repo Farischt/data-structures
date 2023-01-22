@@ -12,10 +12,10 @@ type IQueue[T any] interface {
 	// Space complexity: O(1).
 	IsFull() bool
 	// Enqueue adds a new element to the queue.
-	// Returns an error if the queue is full.
+	// If the queue is full it will increment the capacity.
 	// Time complexity: O(1).
 	// Space complexity: O(1).
-	Enqueue(T) error
+	Enqueue(T)
 	// Dequeue removes the first added element from the queue.
 	// Returns an error if the queue is empty.
 	// Time complexity: O(1).
@@ -63,17 +63,16 @@ func (q *Queue[T]) IsFull() bool {
 }
 
 // Enqueue adds a new element to the queue.
-// Returns an error if the queue is full.
+// If the queue is full it will increment the capacity.
 // Time complexity: O(1).
 // Space complexity: O(1).
-func (q *Queue[T]) Enqueue(data T) error {
+func (q *Queue[T]) Enqueue(data T) {
 
 	if q.IsFull() {
-		return fmt.Errorf("queue is full")
+		q.capacity++
 	}
 
 	q.storage = append(q.storage, data)
-	return nil
 }
 
 // Dequeue removes the first added element from the queue.

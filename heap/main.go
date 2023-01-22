@@ -1,10 +1,10 @@
 package heap
 
-import "fmt"
+import (
+	"fmt"
 
-type number interface {
-	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64
-}
+	"github.com/farischt/ds/utils"
+)
 
 type HeapType string
 
@@ -13,7 +13,7 @@ const (
 	MaxHeap HeapType = "max"
 )
 
-type IHeap[T number] interface {
+type IHeap[T utils.Number] interface {
 	// Returns the size of the heap.
 	size() int
 	// Returns true if the heap is empty.
@@ -53,21 +53,21 @@ type IHeap[T number] interface {
 	// Returns an error if the heap is empty.
 	// The time complexity is O(log(n)).
 	// The space complexity is O(1).
-	Pop() (*T, error)
+	Pop() (*Item[T], error)
 	// Returns the top element of the heap without removing it.
 	// The top element is the element that satisfies the heap property.
 	// Returns an error if the heap is empty.
 	// The time complexity is O(1).
 	// The space complexity is O(1).
-	Top() (*T, error)
+	Top() (*Item[T], error)
 }
 
-type Heap[T number] struct {
+type Heap[T utils.Number] struct {
 	data []Item[T]
 	t    HeapType
 }
 
-func New[T number](t HeapType) *Heap[T] {
+func New[T utils.Number](t HeapType) *Heap[T] {
 	return &Heap[T]{
 		data: make([]Item[T], 0),
 		t:    t,

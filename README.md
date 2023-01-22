@@ -52,7 +52,7 @@ In order to create a stack:
 
     func main() {
         capacity := 1
-        s = stack.New[int](capacity)
+        s := stack.New[int](capacity)
         // You can now use any method implementend in IStack as seen in docs.
     }
 ```
@@ -105,8 +105,8 @@ In order to create a graph:
         // Before adding any edge, make sure to create nodes.
         src := 10
         dst := 20
-        g.AddNode(src)
-        g.AddNode(dst)
+        g.Add(src)
+        g.Add(dst)
         g.AddUndirectedEdge(src, dst)
     }
 ```

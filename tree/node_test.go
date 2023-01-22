@@ -4,14 +4,14 @@ import (
 	"testing"
 )
 
-func TestNode_New(t *testing.T) {
+func TestNodeNew(t *testing.T) {
 	node := NewNode(1)
 	if node.data != 1 {
 		t.Errorf("data is not 1")
 	}
 }
 
-func TestNode_HasChild(t *testing.T) {
+func TestNodeHasChild(t *testing.T) {
 	node := NewNode(1)
 	if node.HasChild() {
 		t.Errorf("node has no child")
@@ -23,7 +23,7 @@ func TestNode_HasChild(t *testing.T) {
 	node.left = nil
 }
 
-func TestNode_HasTwoChild(t *testing.T) {
+func TestNodeHasTwoChild(t *testing.T) {
 	node := NewNode(1)
 	if node.HasTwoChild() {
 		t.Errorf("node has no child")
@@ -39,14 +39,14 @@ func TestNode_HasTwoChild(t *testing.T) {
 	node.left = nil
 }
 
-func TestNode_IsFromRight(t *testing.T) {
+func TestNodeIsFromRight(t *testing.T) {
 	node := NewNode(1)
 	childNode := NewNode(2)
-	
+
 	if childNode.IsFromRight() {
 		t.Errorf("node is not from right")
 	}
-	
+
 	node.right = childNode
 	childNode.parent = node
 	if !childNode.IsFromRight() {
@@ -54,7 +54,7 @@ func TestNode_IsFromRight(t *testing.T) {
 	}
 }
 
-func Test_RemoveRootNodeWithTwoChild(t *testing.T) {
+func TestRemoveRootNodeWithTwoChild(t *testing.T) {
 	node := NewNode(1)
 	node.left = NewNode(2)
 	node.right = NewNode(3)
@@ -67,7 +67,7 @@ func Test_RemoveRootNodeWithTwoChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveRootNodeWithLeftChild(t *testing.T) {
+func TestRemoveRootNodeWithLeftChild(t *testing.T) {
 	tree := New(nil)
 	node := NewNode(10)
 	node.left = NewNode(5)
@@ -79,7 +79,7 @@ func Test_RemoveRootNodeWithLeftChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveRootNodeWithRightChild(t *testing.T) {
+func TestRemoveRootNodeWithRightChild(t *testing.T) {
 	tree := New(nil)
 	node := NewNode(10)
 	node.right = NewNode(15)
@@ -91,7 +91,7 @@ func Test_RemoveRootNodeWithRightChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveRootNodeWithNoChild(t *testing.T) {
+func TestRemoveRootNodeWithNoChild(t *testing.T) {
 	tree := New(nil)
 	node := NewNode(10)
 	tree.root = node
@@ -102,7 +102,7 @@ func Test_RemoveRootNodeWithNoChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveMiddleNodeWithLeftChild(t *testing.T) {
+func TestRemoveMiddleNodeWithLeftChild(t *testing.T) {
 	tree := New(nil)
 	parentNode := NewNode(10)
 	currentNode := NewNode(5)
@@ -118,7 +118,7 @@ func Test_RemoveMiddleNodeWithLeftChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveMiddleNodeWithRightChild(t *testing.T) {
+func TestRemoveMiddleNodeWithRightChild(t *testing.T) {
 	tree := New(nil)
 	parentNode := NewNode(10)
 	currentNode := NewNode(15)
@@ -134,7 +134,7 @@ func Test_RemoveMiddleNodeWithRightChild(t *testing.T) {
 	}
 }
 
-func Test_RemoveLeafNode(t *testing.T) {
+func TestRemoveLeafNode(t *testing.T) {
 	tree := New(nil)
 	parentNode := NewNode(10)
 	currentNode := NewNode(5)

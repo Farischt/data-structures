@@ -4,21 +4,21 @@ import (
 	"testing"
 )
 
-func Test_NewHeap(t *testing.T) {
+func TestNewHeap(t *testing.T) {
 	heap := New[int](MinHeap)
 	if heap == nil {
 		t.Error("should create new heap, test new heap")
 	}
 }
 
-func Test_HeapSize(t *testing.T) {
+func TestHeapSize(t *testing.T) {
 	heap := New[int](MinHeap)
 	if heap.size() != 0 {
 		t.Error("should return correct size, test heap size")
 	}
 }
 
-func Test_IsEmpty(t *testing.T) {
+func TestIsEmpty(t *testing.T) {
 	heap := New[int](MinHeap)
 	if !heap.isEmpty() {
 		t.Error("should be empty, test heap is empty")
@@ -30,7 +30,7 @@ func Test_IsEmpty(t *testing.T) {
 	}
 }
 
-func Test_HeapLess(t *testing.T) {
+func TestHeapLess(t *testing.T) {
 	heap := New[int](MinHeap)
 	heap.data = append(heap.data, *NewItem(0, nil))
 	heap.data = append(heap.data, *NewItem(1, nil))
@@ -40,7 +40,7 @@ func Test_HeapLess(t *testing.T) {
 	}
 }
 
-func Test_HeapGreater(t *testing.T) {
+func TestHeapGreater(t *testing.T) {
 	heap := New[int](MaxHeap)
 	heap.data = append(heap.data, *NewItem(0, nil))
 	heap.data = append(heap.data, *NewItem(1, nil))
@@ -50,7 +50,7 @@ func Test_HeapGreater(t *testing.T) {
 	}
 }
 
-func Test_HeapCompare(t *testing.T) {
+func TestHeapCompare(t *testing.T) {
 	heap := New[int](MinHeap)
 	heap.data = append(heap.data, *NewItem(0, nil))
 	heap.data = append(heap.data, *NewItem(1, nil))
@@ -68,7 +68,7 @@ func Test_HeapCompare(t *testing.T) {
 	}
 }
 
-func Test_HeapSwap(t *testing.T) {
+func TestHeapSwap(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	firstItem := NewItem(0, nil)
@@ -86,7 +86,7 @@ func Test_HeapSwap(t *testing.T) {
 	}
 }
 
-func Test_HeapParent(t *testing.T) {
+func TestHeapParent(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	firstItem := NewItem(0, nil)
@@ -102,7 +102,7 @@ func Test_HeapParent(t *testing.T) {
 	}
 }
 
-func Test_HeapLeft(t *testing.T) {
+func TestHeapLeft(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	firstItem := NewItem(0, nil)
@@ -118,7 +118,7 @@ func Test_HeapLeft(t *testing.T) {
 	}
 }
 
-func Test_HeapRight(t *testing.T) {
+func TestHeapRight(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	heap.data = append(heap.data, *NewItem(0, nil))
@@ -131,7 +131,7 @@ func Test_HeapRight(t *testing.T) {
 	}
 }
 
-func Test_IsInBound(t *testing.T) {
+func TestIsInBound(t *testing.T) {
 	heap := New[int](MinHeap)
 	heap.data = append(heap.data, *NewItem(0, nil))
 	heap.data = append(heap.data, *NewItem(1, nil))
@@ -141,7 +141,7 @@ func Test_IsInBound(t *testing.T) {
 	}
 }
 
-func Test_HeapUp(t *testing.T) {
+func TestHeapUp(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	firstItem := NewItem(0, nil)
@@ -159,7 +159,7 @@ func Test_HeapUp(t *testing.T) {
 	}
 }
 
-func Test_HeapDown(t *testing.T) {
+func TestHeapDown(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	firstItem := NewItem(0, nil)
@@ -179,7 +179,7 @@ func Test_HeapDown(t *testing.T) {
 	}
 }
 
-func Test_HeapPush(t *testing.T) {
+func TestHeapPush(t *testing.T) {
 	heap := New[int](MinHeap)
 	item := NewItem(1, nil)
 	heap.Push(item.Value, item.Information)
@@ -188,7 +188,7 @@ func Test_HeapPush(t *testing.T) {
 	}
 }
 
-func Test_HeapPush2(t *testing.T) {
+func TestHeapPush2(t *testing.T) {
 	heap := New[int](MinHeap)
 	top := NewItem(1, nil)
 	heap.Push(top.Value, top.Information)
@@ -199,7 +199,7 @@ func Test_HeapPush2(t *testing.T) {
 	}
 }
 
-func Test_HeapPush3(t *testing.T) {
+func TestHeapPush3(t *testing.T) {
 	heap := New[int](MinHeap)
 	top := NewItem(-1, nil)
 	heap.Push(1, nil)
@@ -211,7 +211,7 @@ func Test_HeapPush3(t *testing.T) {
 	}
 }
 
-func Test_HeapPush3MaxHeap(t *testing.T) {
+func TestHeapPush3MaxHeap(t *testing.T) {
 	heap := New[int](MaxHeap)
 	top := NewItem(10, nil)
 	heap.Push(1, nil)
@@ -223,7 +223,7 @@ func Test_HeapPush3MaxHeap(t *testing.T) {
 	}
 }
 
-func Test_HeapPushMany(t *testing.T) {
+func TestHeapPushMany(t *testing.T) {
 	heap := New[int](MinHeap)
 	top := NewItem(-1, nil)
 	heap.Push(1, nil)
@@ -244,7 +244,7 @@ func Test_HeapPushMany(t *testing.T) {
 	}
 }
 
-func Test_HeapPop(t *testing.T) {
+func TestHeapPop(t *testing.T) {
 	heap := New[int](MinHeap)
 	top := NewItem(-1, nil)
 	heap.Push(1, nil)
@@ -258,7 +258,7 @@ func Test_HeapPop(t *testing.T) {
 	}
 }
 
-func Test_HeapPop2(t *testing.T) {
+func TestHeapPop2(t *testing.T) {
 	heap := New[int](MinHeap)
 	top := NewItem(-1, nil)
 	heap.Push(1, nil)
@@ -273,7 +273,7 @@ func Test_HeapPop2(t *testing.T) {
 	}
 }
 
-func Test_HeapPopEmpty(t *testing.T) {
+func TestHeapPopEmpty(t *testing.T) {
 	heap := New[int](MinHeap)
 
 	_, err := heap.Pop()
@@ -283,7 +283,7 @@ func Test_HeapPopEmpty(t *testing.T) {
 	}
 }
 
-func Test_HeapPopOneElement(t *testing.T) {
+func TestHeapPopOneElement(t *testing.T) {
 	heap := New[int](MinHeap)
 	top := NewItem(-1, nil)
 	heap.Push(top.Value, top.Information)
@@ -295,7 +295,7 @@ func Test_HeapPopOneElement(t *testing.T) {
 	}
 }
 
-func Test_HeapPopManyElement(t *testing.T) {
+func TestHeapPopManyElement(t *testing.T) {
 	heap := New[int](MinHeap)
 	top := NewItem(-1, nil)
 	heap.Push(top.Value, top.Information)
@@ -320,7 +320,7 @@ func Test_HeapPopManyElement(t *testing.T) {
 	}
 }
 
-func Test_HeapPopManyMaxHeap(t *testing.T) {
+func TestHeapPopManyMaxHeap(t *testing.T) {
 	heap := New[int](MaxHeap)
 	top := NewItem(15, nil)
 	heap.Push(top.Value, top.Information)

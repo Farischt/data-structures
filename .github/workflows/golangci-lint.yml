@@ -26,13 +26,11 @@ jobs:
           # Optional: version of golangci-lint to use in form of v1.2 or v1.2.3 or `latest` to use the latest version
           version: "latest"
 
-          # Exclude test files from linting
-          tests: false
           # Optional: working directory, useful for monorepos
           # working-directory: somedir
 
           # Optional: golangci-lint command line arguments.
-          # args: --issues-exit-code=0
+          args: --tests=false
 
           # Optional: show only new issues if it's a pull request. The default value is `false`.
           # only-new-issues: true
